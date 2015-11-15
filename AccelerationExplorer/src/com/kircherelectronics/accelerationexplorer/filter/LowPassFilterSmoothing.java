@@ -91,7 +91,11 @@ public class LowPassFilterSmoothing
 			output[2] = alpha * output[2] + (1 - alpha) * input[2];
 		}
 
-		return output;
+		//return a copy of output so that it will not be modified outside
+		float[] result = new float[3];
+		System.arraycopy(output, 0, result, 0, output.length);
+
+		return result;
 	}
 
 	public void setTimeConstant(float timeConstant)
