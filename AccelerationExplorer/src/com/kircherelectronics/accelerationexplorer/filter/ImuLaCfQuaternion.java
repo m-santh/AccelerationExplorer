@@ -392,7 +392,7 @@ public class ImuLaCfQuaternion implements ImuLinearAccelerationInterface
 		quatGyro = quatGyro.multiply(filterCoefficient);
 
 		// Scale our quaternion for the accel/mag
-		quatAccelMag = quatAccelMag.multiply(1 - oneMinusCoeff);
+		quatAccelMag = quatAccelMag.multiply(oneMinusCoeff);
 
 		// ...and then add the two quaternions together.
 		// output[0] = alpha * output[0] + (1 - alpha) * input[0];
