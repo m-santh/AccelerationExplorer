@@ -114,14 +114,6 @@ Quaternions offer an angle-axis solution to rotations which do not suffer from m
 
 Kalman filtering, also known as linear quadratic estimation (LQE), is an algorithm that uses a series of measurements observed over time, containing noise (random variations) and other inaccuracies, and produces estimates of unknown variables that tend to be more precise than those based on a single measurement alone. More formally, the Kalman filter operates recursively on streams of noisy input data to produce a statistically optimal estimate of the underlying system state. Much like complimentary filters, Kalman filters require two sets of estimations, which we have from the gyroscope and acceleration/magnetic senor. The Acceleration Explorer implementation of the Kalman filter relies on quaternions. 
 
-Useful Links:
-
-* [Acceleration Explorer Home Page](http://www.kircherelectronics.com/accelerationexplorer/accelerationexplorer)
-
-* [Acceleration Explorer Community](http://www.kircherelectronics.com/forum/viewforum.php?f=6)
-
-*  [Acceleration Explorer Blog Article](http://www.kircherelectronics.com/blog/index.php/11-android/sensors/7-android-accelerometer)
-
 *  [Download Acceleration Explorer from Google Play](https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en)
 
-Written by [Kircher Electronics](https://www.kircherelectronics.com)
+
