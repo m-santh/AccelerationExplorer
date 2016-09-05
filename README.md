@@ -66,7 +66,7 @@ Acceleration Explorer implements three of the most common smoothing filters, low
 
 ### Low-Pass Filter
 
-Acceleration Explorer use an IIR single-pole implementation of a low-pass filter. The coefficient, a (alpha), can be adjusted based on the sample period of the sensor to produce the desired time constant that the filter will act on. It takes a simple form of output[0] = alpha * output[0] + (1 - alpha) * input[0]. Alpha is defined as alpha = timeConstant / (timeConstant + dt) where the time constant is the length of signals the filter should act on and dt is the sample period (1/frequency) of the sensor. For more information on low-pass filters, see [here](http://www.kircherelectronics.com/blog/index.php/11-android/sensors/8-low-pass-filter-the-basics) and [here](http://www.kircherelectronics.com/blog/index.php/11-android/sensors/9-low-pass-filter-optimizing-alpha).
+Acceleration Explorer use an IIR single-pole implementation of a low-pass filter. The coefficient, a (alpha), can be adjusted based on the sample period of the sensor to produce the desired time constant that the filter will act on. It takes a simple form of output[0] = alpha * output[0] + (1 - alpha) * input[0]. Alpha is defined as alpha = timeConstant / (timeConstant + dt) where the time constant is the length of signals the filter should act on and dt is the sample period (1/frequency) of the sensor. For more information on low-pass filters, see the [Acceleration Explorer Wiki](https://github.com/KalebKE/AccelerationExplorer/wiki).
 
 ### Mean Filter
 
