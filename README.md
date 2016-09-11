@@ -13,6 +13,10 @@ The second purpose is a functioning application allowing teachers, students and 
 
 [Download Acceleration Explorer from Google Play](https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en)
 
+## Wiki 
+
+Please see the [Wiki](https://github.com/KalebKE/AccelerationExplorer/wiki) for a detailed explanation of the filters.
+
 ## Overiew of Features
 
 Acceleration Explorer has five main Activities. A logger view, a vector view, a tilt view, a noise view and a diagnostic view.  Each Activity provides a different visualization of some aspect of the acceleration sensor. 
