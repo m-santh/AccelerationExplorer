@@ -390,8 +390,6 @@ public final class AccelerationVectorView extends View
 		canvas.drawLine(rimRect.centerX() - this.x - 0.002f, rimRect.centerY()
 				+ this.y, rimRect.centerX() - this.x + (0.05f * magnitude),
 				rimRect.centerY() + this.y + (0.05f * magnitude), vectorPaint);
-
-		canvas.restore();
 	}
 
 	private void drawAxisLength(Canvas canvas)

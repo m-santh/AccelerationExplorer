@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.filter.MeanFilterSmoothing;
+import com.kircherelectronics.fsensor.filter.averaging.MeanFilter;
 
 /*
  * Acceleration Explorer
@@ -57,7 +57,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 	// Handler for the UI plots so everything plots smoothly
 	private Handler handler;
 
-	private MeanFilterSmoothing meanFilter;
+	private MeanFilter meanFilter;
 
 	private Runnable runable;
 
@@ -86,8 +86,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 		initButtonNoise();
 		initButtonVector();
 
-		meanFilter = new MeanFilterSmoothing();
-		meanFilter.setTimeConstant(0.2f);
+		meanFilter = new MeanFilter(0.2f);
 
 		sensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
@@ -99,7 +98,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 			@Override
 			public void run()
 			{
-				handler.postDelayed(this, 100);
+				handler.postDelayed(this, 20);
 
 				updateAccelerationText();
 			}
@@ -151,7 +150,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 
 		sensorManager.registerListener(this,
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_NORMAL);
+				SensorManager.SENSOR_DELAY_FASTEST);
 
 		handler.post(runable);
 	}
@@ -165,7 +164,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 			System.arraycopy(event.values, 0, acceleration, 0,
 					event.values.length);
 
-			acceleration = meanFilter.addSamples(acceleration);
+			acceleration = meanFilter.filter(acceleration);
 		}
 	}
 

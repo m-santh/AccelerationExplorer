@@ -24,12 +24,11 @@ import android.widget.TextView;
 
 import com.androidplot.xy.XYPlot;
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
 import com.kircherelectronics.accelerationexplorer.activity.config.NoiseConfigActivity;
-import com.kircherelectronics.accelerationexplorer.filter.LowPassFilterSmoothing;
-import com.kircherelectronics.accelerationexplorer.filter.MeanFilterSmoothing;
-import com.kircherelectronics.accelerationexplorer.filter.MedianFilterSmoothing;
 import com.kircherelectronics.accelerationexplorer.plot.DynamicBarPlot;
+import com.kircherelectronics.fsensor.filter.averaging.LowPassFilter;
+import com.kircherelectronics.fsensor.filter.averaging.MeanFilter;
+import com.kircherelectronics.fsensor.filter.averaging.MedianFilter;
 
 /*
  * Acceleration Explorer
@@ -91,12 +90,10 @@ public class NoiseActivity extends Activity implements SensorEventListener
 	private Handler handler;
 
 	// Low-Pass Filter
-	private LowPassFilterSmoothing lpf;
-
+	private LowPassFilter lpf;
 	// Mean filter
-	private MeanFilterSmoothing meanFilter;
-
-	private MedianFilterSmoothing medianFilter;
+	private MeanFilter meanFilter;
+	private MedianFilter medianFilter;
 
 	private Runnable runable;
 
@@ -127,9 +124,9 @@ public class NoiseActivity extends Activity implements SensorEventListener
 		sensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
-		lpf = new LowPassFilterSmoothing();
-		meanFilter = new MeanFilterSmoothing();
-		medianFilter = new MedianFilterSmoothing();
+		lpf = new LowPassFilter();
+		meanFilter = new MeanFilter();
+		medianFilter = new MedianFilter();
 
 		initStatistics();
 
@@ -222,11 +219,11 @@ public class NoiseActivity extends Activity implements SensorEventListener
 		// Get a local copy of the sensor values
 		System.arraycopy(event.values, 0, acceleration, 0, event.values.length);
 
-		lpfOutput = lpf.addSamples(acceleration);
+		lpfOutput = lpf.filter(acceleration);
 
-		meanFilterOutput = meanFilter.addSamples(acceleration);
+		meanFilterOutput = meanFilter.filter(acceleration);
 
-		medianFilterOutput = medianFilter.addSamples(acceleration);
+		medianFilterOutput = medianFilter.filter(acceleration);
 	}
 
 	@Override

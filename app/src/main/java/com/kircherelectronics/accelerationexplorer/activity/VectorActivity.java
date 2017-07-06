@@ -117,9 +117,7 @@ public class VectorActivity extends FilterActivity
 
 	private void updateVector()
 	{
-		if (!lpfLinearAccelEnabled && !imuLaCfOrienationEnabled
-				&& !imuLaCfRotationMatrixEnabled && !imuLaCfQuaternionEnabled
-				&& !imuLaKfQuaternionEnabled && !androidLinearAccelEnabled)
+		if (!fSensorLinearAccelerationEnabled && !androidLinearAccelerationEnabled)
 		{
 			view.updatePoint(acceleration[0], acceleration[1]);
 		}
