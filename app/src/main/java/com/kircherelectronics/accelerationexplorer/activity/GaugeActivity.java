@@ -120,9 +120,9 @@ public class GaugeActivity extends FilterActivity {
                     Color.rgb(255, 61, 0));
             gaugeRotation.updateRotation(acceleration);
         } else {
-//            gaugeAcceleration.updatePoint(linearAcceleration[0],
-//                    linearAcceleration[1], Color.rgb(255, 61, 0));
-//            gaugeRotation.updateRotation(linearAcceleration);
+            gaugeAcceleration.updatePoint(linearAcceleration[0],
+                    linearAcceleration[1], Color.rgb(255, 61, 0));
+            gaugeRotation.updateRotation(linearAcceleration);
         }
     }
 }

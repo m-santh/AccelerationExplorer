@@ -11,15 +11,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidplot.xy.XYPlot;
+import com.github.mikephil.charting.charts.LineChart;
 import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
-import com.kircherelectronics.accelerationexplorer.plot.DynamicLinePlot;
+import com.kircherelectronics.accelerationexplorer.plot.DynamicChart;
 import com.kircherelectronics.accelerationexplorer.plot.PlotColor;
+import com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,15 +59,12 @@ import java.util.Locale;
  */
 public class LoggerActivity extends FilterActivity implements Runnable {
     // Plot keys for the acceleration plot
-    private final static int PLOT_ACCEL_X_AXIS_KEY = 0;
-    private final static int PLOT_ACCEL_Y_AXIS_KEY = 1;
-    private final static int PLOT_ACCEL_Z_AXIS_KEY = 2;
     private final static String tag = LoggerActivity.class.getSimpleName();
     // Plot colors
-    private PlotColor color;
+
     private DecimalFormat df;
     // Graph plot for the UI outputs
-    private DynamicLinePlot dynamicPlot;
+    private DynamicChart dynamicChart;
     // The generation of the log output
     private int generation = 0;
     // Output log
@@ -77,12 +74,9 @@ public class LoggerActivity extends FilterActivity implements Runnable {
     // Log output time stamp
     private long logTime = 0;
     // Color keys for the acceleration plot
-    private int plotAccelXAxisColor;
     // Acceleration plot titles
     private String plotAccelXAxisTitle = "X-Axis";
-    private int plotAccelYAxisColor;
     private String plotAccelYAxisTitle = "Y-Axis";
-    private int plotAccelZAxisColor;
     private String plotAccelZAxisTitle = "Z-Axis";
     private String plotSensorFrequencyTitle = "Frequency";
     private Thread thread;
@@ -102,7 +96,6 @@ public class LoggerActivity extends FilterActivity implements Runnable {
         df = (DecimalFormat) nf;
         df.applyPattern("###.####");
 
-        initColor();
         initPlots();
         initStartButton();
 
@@ -110,9 +103,8 @@ public class LoggerActivity extends FilterActivity implements Runnable {
             @Override
             public void run() {
                 handler.postDelayed(this, 10);
-
                 updateAccelerationText();
-                plotData();
+                dynamicChart.setAcceleration(acceleration);
             }
         };
     }
@@ -149,8 +141,16 @@ public class LoggerActivity extends FilterActivity implements Runnable {
     @Override
     public void onPause() {
         super.onPause();
-
+        dynamicChart.onStopPlot();
+        dynamicChart.onPause();
         stopDataLog();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dynamicChart.onResume();
+        dynamicChart.onStartPlot();
     }
 
     /**
@@ -167,56 +167,17 @@ public class LoggerActivity extends FilterActivity implements Runnable {
     }
 
     /**
-     * Create the output graph line chart.
-     */
-    private void addAccelerationPlot() {
-        addGraphPlot(plotAccelXAxisTitle, PLOT_ACCEL_X_AXIS_KEY,
-                plotAccelXAxisColor);
-        addGraphPlot(plotAccelYAxisTitle, PLOT_ACCEL_Y_AXIS_KEY,
-                plotAccelYAxisColor);
-        addGraphPlot(plotAccelZAxisTitle, PLOT_ACCEL_Z_AXIS_KEY,
-                plotAccelZAxisColor);
-    }
-
-    /**
-     * Add a plot to the graph.
-     *
-     * @param title The name of the plot.
-     * @param key   The unique plot key
-     * @param color The color of the plot
-     */
-    private void addGraphPlot(String title, int key, int color) {
-        dynamicPlot.addSeriesPlot(title, key, color);
-    }
-
-    /**
-     * Create the plot colors.
-     */
-    private void initColor() {
-        color = new PlotColor(this);
-
-        plotAccelXAxisColor = color.getDarkBlue();
-        plotAccelYAxisColor = color.getDarkGreen();
-        plotAccelZAxisColor = color.getDarkRed();
-    }
-
-    /**
      * Initialize the plots.
      */
     private void initPlots() {
         // Create the graph plot
-        XYPlot plot = (XYPlot) findViewById(R.id.plot_sensor);
+        LineChart plot = (LineChart) findViewById(R.id.plot_sensor);
 
-        plot.setTitle("Acceleration");
-        dynamicPlot = new DynamicLinePlot(plot, this);
-        dynamicPlot.setMaxRange(20);
-        dynamicPlot.setMinRange(-20);
-
-        addAccelerationPlot();
+        dynamicChart = new DynamicChart(this, plot);
     }
 
     private void initStartButton() {
-        final Button button = (Button) findViewById(R.id.button_start);
+        final VectorDrawableButton button = (VectorDrawableButton) findViewById(R.id.button_start);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -271,32 +232,6 @@ public class LoggerActivity extends FilterActivity implements Runnable {
 
             dataReady = false;
         }
-    }
-
-    /**
-     * Plot the output data in the UI.
-     */
-    private void plotData() {
-        if (!fSensorLinearAccelerationEnabled && !androidLinearAccelerationEnabled) {
-            dynamicPlot.setData(acceleration[0], PLOT_ACCEL_X_AXIS_KEY);
-            dynamicPlot.setData(acceleration[1], PLOT_ACCEL_Y_AXIS_KEY);
-            dynamicPlot.setData(acceleration[2], PLOT_ACCEL_Z_AXIS_KEY);
-        } else {
-            dynamicPlot.setData(linearAcceleration[0], PLOT_ACCEL_X_AXIS_KEY);
-            dynamicPlot.setData(linearAcceleration[1], PLOT_ACCEL_Y_AXIS_KEY);
-            dynamicPlot.setData(linearAcceleration[2], PLOT_ACCEL_Z_AXIS_KEY);
-        }
-
-        dynamicPlot.draw();
-    }
-
-    /**
-     * Remove a plot from the graph.
-     *
-     * @param key
-     */
-    private void removeGraphPlot(int key) {
-        dynamicPlot.removeSeriesPlot(key);
     }
 
     private void showHelpDialog() {

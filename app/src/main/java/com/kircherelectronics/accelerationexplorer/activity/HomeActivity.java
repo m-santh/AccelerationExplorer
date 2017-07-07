@@ -1,15 +1,16 @@
 package com.kircherelectronics.accelerationexplorer.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
+import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
+import com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton;
 import com.kircherelectronics.fsensor.filter.averaging.MeanFilter;
 
 /*
@@ -46,7 +49,7 @@ import com.kircherelectronics.fsensor.filter.averaging.MeanFilter;
  * @author Kaleb
  *
  */
-public class HomeActivity extends Activity implements SensorEventListener
+public class HomeActivity extends AppCompatActivity implements SensorEventListener
 {
 	private final static String tag = HomeActivity.class.getSimpleName();
 
@@ -57,17 +60,15 @@ public class HomeActivity extends Activity implements SensorEventListener
 	// Handler for the UI plots so everything plots smoothly
 	private Handler handler;
 
-	private MeanFilter meanFilter;
-
-	private Runnable runable;
+	private Runnable runnable;
 
 	// Sensor manager to access the accelerometer
 	private SensorManager sensorManager;
 
-	// Text views for real-time output
-	private TextView textViewXAxis;
-	private TextView textViewYAxis;
-	private TextView textViewZAxis;
+	private GaugeAcceleration gaugeAcceleration;
+
+
+    private int accelerationDotColor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -76,31 +77,26 @@ public class HomeActivity extends Activity implements SensorEventListener
 
 		setContentView(R.layout.layout_home);
 
-		textViewXAxis = (TextView) findViewById(R.id.value_x_axis);
-		textViewYAxis = (TextView) findViewById(R.id.value_y_axis);
-		textViewZAxis = (TextView) findViewById(R.id.value_z_axis);
+        this.accelerationDotColor = Color.parseColor("#2196F3");
 
-		initButtonDiagnostic();
+		gaugeAcceleration = (GaugeAcceleration) findViewById(R.id.gauge_acceleration);
+
 		initButtonGauge();
 		initButtonLogger();
-		initButtonNoise();
 		initButtonVector();
-
-		meanFilter = new MeanFilter(0.2f);
 
 		sensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
 		handler = new Handler();
 
-		runable = new Runnable()
+		runnable = new Runnable()
 		{
 			@Override
 			public void run()
 			{
 				handler.postDelayed(this, 20);
-
-				updateAccelerationText();
+                updateGauge();
 			}
 		};
 	}
@@ -140,7 +136,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 
 		sensorManager.unregisterListener(this);
 
-		handler.removeCallbacks(runable);
+		handler.removeCallbacks(runnable);
 	}
 
 	@Override
@@ -152,7 +148,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_FASTEST);
 
-		handler.post(runable);
+		handler.post(runnable);
 	}
 
 	@Override
@@ -161,10 +157,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
 		{
 			// Get a local copy of the acceleration measurements
-			System.arraycopy(event.values, 0, acceleration, 0,
-					event.values.length);
-
-			acceleration = meanFilter.filter(acceleration);
+			System.arraycopy(event.values, 0, acceleration, 0,event.values.length);
 		}
 	}
 
@@ -176,7 +169,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 
 	private void initButtonGauge()
 	{
-		Button button = (Button) this.findViewById(R.id.button_gauge_mode);
+		VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_gauge_mode);
 
 		button.setOnClickListener(new View.OnClickListener()
 		{
@@ -190,25 +183,9 @@ public class HomeActivity extends Activity implements SensorEventListener
 		});
 	}
 
-	private void initButtonDiagnostic()
-	{
-		Button button = (Button) this.findViewById(R.id.button_diagnostic_mode);
-
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						DiagnosticActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
 	private void initButtonLogger()
 	{
-		Button button = (Button) this.findViewById(R.id.button_logger_mode);
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_logger_mode);
 
 		button.setOnClickListener(new View.OnClickListener()
 		{
@@ -222,25 +199,9 @@ public class HomeActivity extends Activity implements SensorEventListener
 		});
 	}
 
-	private void initButtonNoise()
-	{
-		Button button = (Button) this.findViewById(R.id.button_noise_mode);
-
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						NoiseActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
 	private void initButtonVector()
 	{
-		Button button = (Button) this.findViewById(R.id.button_vector_mode);
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_vector_mode);
 
 		button.setOnClickListener(new View.OnClickListener()
 		{
@@ -270,11 +231,7 @@ public class HomeActivity extends Activity implements SensorEventListener
 		helpDialog.show();
 	}
 
-	private void updateAccelerationText()
-	{
-		// Update the acceleration data
-		textViewXAxis.setText(String.format("%.2f", acceleration[0]));
-		textViewYAxis.setText(String.format("%.2f", acceleration[1]));
-		textViewZAxis.setText(String.format("%.2f", acceleration[2]));
-	}
+	private void updateGauge() {
+        gaugeAcceleration.updatePoint(acceleration[0], acceleration[1], accelerationDotColor );
+    }
 }

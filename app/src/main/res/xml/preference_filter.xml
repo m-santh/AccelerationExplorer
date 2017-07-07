@@ -80,11 +80,11 @@
 
         <EditTextPreference
             android:defaultValue="@string/default_value_low_pass_filter"
-            android:dialogMessage="Set LPF Coefficient)"
-            android:dialogTitle="Coefficient"
+            android:dialogMessage="Set LPF Time Constant"
+            android:dialogTitle="Time Constant"
             android:inputType="numberDecimal"
-            android:key="lpf_linear_accel_coeff_preference"
-            android:title="Set LPF Coefficient" />
+            android:key="lpf_linear_accel_time_constant_preference"
+            android:title="Set LPF Time Constant" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Android Linear Acceleration" >
         <SwitchPreference
@@ -95,66 +95,39 @@
             android:summaryOn="Android Linear Accel is On"
             android:title="Enable Linear Accel Android" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="IMULACF Complimentary Orientation" >
+    <PreferenceCategory android:title="Complimentary Fusion" >
         <SwitchPreference
             android:defaultValue="false"
-            android:dialogTitle="Enable IMULACF Orienation"
-            android:key="imulacf_orienation_enabled_preference"
-            android:summaryOff="IMULACF Orienation is Off"
-            android:summaryOn="IMULACF Orienation is On"
-            android:title="Enable IMULACF Orienation" />
+            android:dialogTitle="Enable Complimentary Fusion"
+            android:key="complimentary_fusion_enabled_preference"
+            android:summaryOff="Fusion is Off"
+            android:summaryOn="Fusion is On"
+            android:title="Enable Complimentary Fusion" />
 
         <EditTextPreference
             android:defaultValue="@string/default_value_low_pass_filter"
-            android:dialogMessage="Set Filter Coefficient"
-            android:dialogTitle="Coefficient"
+            android:dialogMessage="Set Time Constant"
+            android:dialogTitle="Time Constant"
             android:inputType="numberDecimal"
-            android:key="imulacf_orienation_coeff_preference"
-            android:title="Set Filter Coefficient" />
+            android:key="complimentary_fusion_time_constant_preference"
+            android:title="Set Filter Time Constant" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="IMULACF Complimentary Rotation Matrix" >
+    <PreferenceCategory android:title="Kalman Fusion" >
         <SwitchPreference
             android:defaultValue="false"
-            android:dialogTitle="Enable IMULACF Rotation Matrix"
-            android:key="imulacf_rotation_matrix_enabled_preference"
-            android:summaryOff="IMULACF Rotation Matrix is Off"
-            android:summaryOn="IMULACF Rotation Matrix is On"
-            android:title="Enable IMULACF Rotation Matrix" />
+            android:dialogTitle="Enable Kalman Fusion"
+            android:key="kalman_fusion_enabled_preference"
+            android:summaryOff="Fusion is Off"
+            android:summaryOn="Fusion is On"
+            android:title="Enable Kalman Fusion" />
 
         <EditTextPreference
             android:defaultValue="@string/default_value_low_pass_filter"
-            android:dialogMessage="Set Filter Coefficient"
-            android:dialogTitle="Coefficient"
+            android:dialogMessage="Set Time Constant"
+            android:dialogTitle="Time Constant"
             android:inputType="numberDecimal"
-            android:key="imulacf_rotation_matrix_coeff_preference"
-            android:title="Set Filter Coefficient" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="IMULACF Complimentary Quaternion" >
-        <SwitchPreference
-            android:defaultValue="false"
-            android:dialogTitle="Enable IMULACF Quaternion"
-            android:key="imulacf_quaternion_enabled_preference"
-            android:summaryOff="IMULACF Quaternion is Off"
-            android:summaryOn="IMULACF Quaternion is On"
-            android:title="Enable IMULACF Quaternion" />
-
-        <EditTextPreference
-            android:defaultValue="@string/default_value_low_pass_filter"
-            android:dialogMessage="Set Filter Coefficient"
-            android:dialogTitle="Coefficient"
-            android:inputType="numberDecimal"
-            android:key="imulacf_quaternion_coeff_preference"
-            android:title="Set Filter Coefficient" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="IMULAKF Kalman Quaternion" >
-        <SwitchPreference
-            android:defaultValue="false"
-            android:dialogTitle="Enable IMULAKF Quaternion"
-            android:inputType="numberDecimal"
-            android:key="imulakf_quaternion_enabled_preference"
-            android:summaryOff="IMULAKF Quaternion is Off"
-            android:summaryOn="IMULAKF Quaternion is On"
-            android:title="Enable IMULAKF Quaternion" />
+            android:key="kalman_fusion_time_constant_preference"
+            android:title="Set Filter Time Constant" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -21,7 +21,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.2.1'
-    compile files('libs/androidplot-core-0.6.1.jar')
+    compile 'com.android.support:support-v4:25.4.0'
+    compile "com.android.support:appcompat-v7:25.4.0"
     compile project(path: ':fsensor')
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    compile "android.arch.lifecycle:runtime:1.0.0-alpha3"
+    compile "android.arch.lifecycle:extensions:1.0.0-alpha3"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha3"
 }

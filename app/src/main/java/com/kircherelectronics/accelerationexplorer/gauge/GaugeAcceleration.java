@@ -4,18 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.EmbossMaskFilter;
-import android.graphics.LinearGradient;
-import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.graphics.Shader;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
 
 /*
@@ -109,16 +104,8 @@ public final class GaugeAcceleration extends View
 	private RectF rimRect;
 	// added by Scott
 	private RectF rimOuterRect;
-	private RectF rimOuterTopRect;
-	private RectF rimOuterBottomRect;
-	private RectF rimOuterLeftRect;
-	private RectF rimOuterRightRect;
 	private RectF innerRim;
-	private RectF innerface;
-	private RectF rimInnerTopRect;
-	private RectF rimInnerBottomRect;
-	private RectF rimInnerLeftRect;
-	private RectF rimInnerRightRect;
+	private RectF innerFace;
 	private RectF innerMostDot;
 
 	private float x;
@@ -230,11 +217,9 @@ public final class GaugeAcceleration extends View
 		// the linear gradient is a bit skewed for realism
 		rimPaint = new Paint();
 		rimPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-		rimPaint.setShader(new LinearGradient(0.40f, 0.0f, 0.60f, 1.0f, Color
-				.rgb(255, 255, 255), Color.rgb(255, 255, 255),
-				Shader.TileMode.CLAMP));
+		rimPaint.setColor(Color.GRAY);
 
-		float rimSize = 0.03f;
+		float rimSize = 0.02f;
 		faceRect = new RectF();
 		faceRect.set(rimRect.left + rimSize, rimRect.top + rimSize,
 				rimRect.right - rimSize, rimRect.bottom - rimSize);
@@ -242,7 +227,7 @@ public final class GaugeAcceleration extends View
 		rimShadowPaint = new Paint();
 		rimShadowPaint.setStyle(Paint.Style.FILL);
 		rimShadowPaint.setAntiAlias(true);
-		rimShadowPaint.setXfermode(new PorterDuffXfermode(Mode.CLEAR)); 
+		rimShadowPaint.setXfermode(new PorterDuffXfermode(Mode.CLEAR));
 
 		// set the size of the outside white with the rectangles.
 		// a 'bigger' negative will increase the size.
@@ -252,45 +237,16 @@ public final class GaugeAcceleration extends View
 				+ rimOuterSize, rimRect.right - rimOuterSize, rimRect.bottom
 				- rimOuterSize);
 
-		rimOuterTopRect = new RectF(0.5f, 0.116f, 0.5f, 0.07f);
-		rimOuterTopRect.set(rimOuterTopRect.left + rimOuterSize,
-				rimOuterTopRect.top + rimOuterSize, rimOuterTopRect.right
-						- rimOuterSize, rimOuterTopRect.bottom - rimOuterSize);
-
-		rimOuterBottomRect = new RectF(0.5f, 0.93f, 0.5f, 0.884f);
-		rimOuterBottomRect.set(rimOuterBottomRect.left + rimOuterSize,
-				rimOuterBottomRect.top + rimOuterSize, rimOuterBottomRect.right
-						- rimOuterSize, rimOuterBottomRect.bottom
-						- rimOuterSize);
-
-		rimOuterLeftRect = new RectF(0.116f, 0.5f, 0.07f, 0.5f);
-		rimOuterLeftRect.set(rimOuterLeftRect.left + rimOuterSize,
-				rimOuterLeftRect.top + rimOuterSize, rimOuterLeftRect.right
-						- rimOuterSize, rimOuterLeftRect.bottom - rimOuterSize);
-
-		rimOuterRightRect = new RectF(0.93f, 0.5f, 0.884f, 0.5f);
-		rimOuterRightRect
-				.set(rimOuterRightRect.left + rimOuterSize,
-						rimOuterRightRect.top + rimOuterSize,
-						rimOuterRightRect.right - rimOuterSize,
-						rimOuterRightRect.bottom - rimOuterSize);
-
 		// inner rim declarations the black oval/rect
 		float rimInnerSize = 0.02f;
-		innerface = new RectF();
-		innerface.set(innerRim.left + rimInnerSize,
+		innerFace = new RectF();
+		innerFace.set(innerRim.left + rimInnerSize,
 				innerRim.top + rimInnerSize, innerRim.right - rimInnerSize,
 				innerRim.bottom - rimInnerSize);
 
-		// inner 4 small rectangles
-		rimInnerTopRect = new RectF(0.46f, 0.23f, 0.54f, 0.26f);
-		rimInnerBottomRect = new RectF(0.46f, 0.74f, 0.54f, 0.77f);
-		rimInnerLeftRect = new RectF(0.23f, 0.54f, 0.26f, 0.46f);
-		rimInnerRightRect = new RectF(0.74f, 0.54f, 0.77f, 0.46f);
-
 		pointPaint = new Paint();
 		pointPaint.setAntiAlias(true);
-		pointPaint.setColor(Color.WHITE);
+		pointPaint.setColor(Color.parseColor("#2196F3"));
 		pointPaint.setShadowLayer(0.01f, -0.005f, -0.005f, 0x7f000000);
 		pointPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
@@ -357,17 +313,6 @@ public final class GaugeAcceleration extends View
 
 		// first, draw the metallic body
 		canvas.drawOval(rimRect, rimPaint);
-		// now the outer rim circle
-		// canvas.drawOval(rimRect, rimCirclePaint);
-
-		// top rect
-		canvas.drawRect(rimOuterTopRect, rimPaint);
-		// bottom rect
-		canvas.drawRect(rimOuterBottomRect, rimPaint);
-		// left rect
-		canvas.drawRect(rimOuterLeftRect, rimPaint);
-		// right rect
-		canvas.drawRect(rimOuterRightRect, rimPaint);
 
 		// draw the rim shadow inside the face
 		canvas.drawOval(faceRect, rimShadowPaint);
@@ -375,17 +320,8 @@ public final class GaugeAcceleration extends View
 		// draw the inner white rim circle
 		canvas.drawOval(innerRim, rimPaint);
 
-		// draw inner topRect
-		canvas.drawRect(rimInnerTopRect, rimPaint);
-		// draw inner bottomRect
-		canvas.drawRect(rimInnerBottomRect, rimPaint);
-		// draw inner leftrect
-		canvas.drawRect(rimInnerLeftRect, rimPaint);
-		// draw inner rightRect
-		canvas.drawRect(rimInnerRightRect, rimPaint);
-
 		// draw the inner black oval
-		canvas.drawOval(innerface, rimShadowPaint);
+		canvas.drawOval(innerFace, rimShadowPaint);
 
 		// draw inner white dot
 		canvas.drawOval(innerMostDot, rimPaint);
