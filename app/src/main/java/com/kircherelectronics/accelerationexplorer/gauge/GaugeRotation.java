@@ -3,16 +3,12 @@ package com.kircherelectronics.accelerationexplorer.gauge;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.RadialGradient;
 import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -57,6 +53,8 @@ public final class GaugeRotation extends View {
     private Bitmap bezelBitmap;
     // Static bitmap for the face of the gauge
     private Bitmap faceBitmap;
+    private Bitmap skyBitmap;
+    private Bitmap mutableBitmap;
 
     // Keep track of the rotation of the device
     private float[] rotation = new float[3];
@@ -65,6 +63,7 @@ public final class GaugeRotation extends View {
     private RectF rimRect;
 
     // Rectangle to draw the sky section of the gauge face
+    private RectF faceBackgroundRect;
     private RectF skyBackgroundRect;
 
     // Paint to draw the gauge bitmaps
@@ -188,6 +187,10 @@ public final class GaugeRotation extends View {
 
         float rimSize = 0.02f;
 
+        faceBackgroundRect = new RectF();
+        faceBackgroundRect.set(rimRect.left + rimSize, rimRect.top + rimSize,
+                rimRect.right - rimSize, rimRect.bottom - rimSize);
+
         skyBackgroundRect = new RectF();
         skyBackgroundRect.set(rimRect.left + rimSize, rimRect.top + rimSize,
                 rimRect.right - rimSize, rimRect.bottom - rimSize);
@@ -261,35 +264,40 @@ public final class GaugeRotation extends View {
             faceBitmap.recycle();
         }
 
+        if(skyBitmap != null) {
+            skyBitmap.recycle();
+        }
+
+        if(mutableBitmap != null) {
+            mutableBitmap.recycle();
+        }
+
+        skyPaint.setFilterBitmap(false);
+
         faceBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+                Bitmap.Config.ARGB_8888);
+        skyBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+                Bitmap.Config.ARGB_8888);
+        mutableBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
                 Bitmap.Config.ARGB_8888);
 
         Canvas faceCanvas = new Canvas(faceBitmap);
+        Canvas skyCanvas = new Canvas(skyBitmap);
+        Canvas mutableCanvas = new Canvas(mutableBitmap);
         float scale = (float) getWidth();
         faceCanvas.scale(scale, scale);
+        skyCanvas.scale(scale, scale);
 
-        skyBackgroundRect.set(rimRect.left, rimRect.top, rimRect.right,
+        faceBackgroundRect.set(rimRect.left, rimRect.top, rimRect.right,
                 rimRect.bottom);
 
-        faceCanvas.drawArc(skyBackgroundRect, 0, 360, true, skyPaint);
+        float halfHeight = ((rimRect.top - rimRect.bottom)/2);
 
-        int[] allpixels = new int[faceBitmap.getHeight()
-                * faceBitmap.getWidth()];
+        skyBackgroundRect.set(rimRect.left, rimRect.top - halfHeight + (rotation[1]*halfHeight) , rimRect.right,
+                rimRect.bottom);
 
-        faceBitmap.getPixels(allpixels, 0, faceBitmap.getWidth(), 0, 0,
-                faceBitmap.getWidth(), faceBitmap.getHeight());
-
-        for (int i = 0; i < faceBitmap.getHeight() * faceBitmap.getWidth(); i++) {
-            allpixels[i] = Color.TRANSPARENT;
-        }
-
-        int height = (int) ((faceBitmap.getHeight() / 2) - ((faceBitmap
-                .getHeight() / 2.5) * rotation[1]));
-
-        height = Math.min(height, faceBitmap.getHeight());
-
-        faceBitmap.setPixels(allpixels, 0, faceBitmap.getWidth(), 0, 0,
-                faceBitmap.getWidth(), height);
+        faceCanvas.drawArc(faceBackgroundRect, 0, 360, true, skyPaint);
+        skyCanvas.drawRect(skyBackgroundRect, skyPaint);
 
         float angle = (float) -(Math.atan2(-rotation[0], -rotation[2]) * 180 / Math.PI);
 
@@ -297,7 +305,12 @@ public final class GaugeRotation extends View {
         canvas.rotate(angle, faceBitmap.getWidth() / 2f,
                 faceBitmap.getHeight() / 2f);
 
-        canvas.drawBitmap(faceBitmap, 0, 0, backgroundPaint);
+        mutableCanvas.drawBitmap(faceBitmap, 0, 0, skyPaint);
+        skyPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        mutableCanvas.drawBitmap(skyBitmap, 0, 0, skyPaint);
+        skyPaint.setXfermode(null);
+
+        canvas.drawBitmap(mutableBitmap, 0, 0, backgroundPaint);
         canvas.restore();
     }
 
