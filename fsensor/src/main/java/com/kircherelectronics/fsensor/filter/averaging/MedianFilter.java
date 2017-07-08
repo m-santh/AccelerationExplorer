@@ -3,6 +3,7 @@ package com.kircherelectronics.fsensor.filter.averaging;
 import org.apache.commons.math3.stat.StatUtils;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 
 /*
  * Copyright 2017, Kircher Electronics, LLC
@@ -81,7 +82,7 @@ public class MedianFilter extends AveragingFilter {
 
         int filterWindow = (int) Math.ceil(hz * timeConstant);
 
-        values.addLast(data);
+        values.addLast(Arrays.copyOf(data, data.length));
 
         while (values.size() > filterWindow) {
             values.removeFirst();

@@ -133,8 +133,6 @@ public abstract class FilterActivity extends Activity implements SensorEventList
         super.onResume();
 
         resetSensorFrequencyTimer();
-        initFilters();
-        getAxisPrefs();
         updateSensorDelay();
 
         handler.post(runable);
@@ -280,128 +278,7 @@ public abstract class FilterActivity extends Activity implements SensorEventList
         hz = (count++ / ((timestamp - startTime) / 1000000000.0f));
     }
 
-    private void getAxisPrefs() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-        axisInverted = prefs.getBoolean(
-                FilterConfigActivity.AXIS_INVERSION_ENABLED_KEY, false);
-    }
 
-    private boolean getPrefAndroidLinearAccelEnabled() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return prefs.getBoolean(
-                FilterConfigActivity.ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-    }
-
-    private float getPrefImuLaCfOrienationCoeff() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return Float.valueOf(prefs.getString(
-                FilterConfigActivity.IMULACF_ORIENTATION_COEFF_KEY, "0.5"));
-    }
-
-    private boolean getPrefLpfLinearAccelEnabled() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return prefs.getBoolean(
-                FilterConfigActivity.LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-    }
-
-    private boolean getPrefLpfSmoothingEnabled() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return prefs.getBoolean(FilterConfigActivity.LPF_SMOOTHING_ENABLED_KEY,
-                false);
-    }
-
-    private float getPrefLpfSmoothingTimeConstant() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return Float.valueOf(prefs.getString(
-                FilterConfigActivity.LPF_SMOOTHING_TIME_CONSTANT_KEY, "0.5"));
-    }
-
-    private boolean getPrefMeanFilterSmoothingEnabled() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return prefs.getBoolean(
-                FilterConfigActivity.MEAN_FILTER_SMOOTHING_ENABLED_KEY, false);
-    }
-
-    private float getPrefMeanFilterSmoothingTimeConstant() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return Float.valueOf(prefs.getString(
-                FilterConfigActivity.MEAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY,
-                "0.5"));
-    }
-
-    private boolean getPrefMedianFilterSmoothingEnabled() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return prefs
-                .getBoolean(
-                        FilterConfigActivity.MEDIAN_FILTER_SMOOTHING_ENABLED_KEY,
-                        false);
-    }
-
-    private float getPrefMedianFilterSmoothingTimeConstant() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-
-        return Float.valueOf(prefs.getString(
-                FilterConfigActivity.MEDIAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY,
-                "0.5"));
-    }
-
-    /**
-     * Read in the current user preferences.
-     */
-    private void getSensorFrequencyPrefs() {
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        this.frequencySelection = Integer.parseInt(prefs.getString(PrefUtils.SENSOR_FREQUENCY_PREF,
-                PrefUtils.SENSOR_FREQUENCY_FAST));
-    }
-
-    private void initFilters() {
-        meanFilterSmoothingEnabled = getPrefMeanFilterSmoothingEnabled();
-        medianFilterSmoothingEnabled = getPrefMedianFilterSmoothingEnabled();
-        lpfSmoothingEnabled = getPrefLpfSmoothingEnabled();
-
-        meanFilterAcceleration.setTimeConstant(getPrefMeanFilterSmoothingTimeConstant());
-        meanFilterMagneticSmoothing.setTimeConstant(getPrefMeanFilterSmoothingTimeConstant());
-        meanFilterRotationSmoothing.setTimeConstant(getPrefMeanFilterSmoothingTimeConstant());
-
-        medianFilterAccelSmoothing.setTimeConstant(getPrefMedianFilterSmoothingTimeConstant());
-        medianFilterMagneticSmoothing.setTimeConstant(getPrefMedianFilterSmoothingTimeConstant());
-        medianFilterRotationSmoothing.setTimeConstant(getPrefMedianFilterSmoothingTimeConstant());
-
-        lpfAccelSmoothing.setTimeConstant(getPrefLpfSmoothingTimeConstant());
-        lpfMagneticSmoothing.setTimeConstant(getPrefLpfSmoothingTimeConstant());
-        lpfRotationSmoothing.setTimeConstant(getPrefLpfSmoothingTimeConstant());
-
-        fSensorLinearAccelerationEnabled = getPrefLpfLinearAccelEnabled();
-        //lpfLinearAcceleration.setFilterCoefficient(getPrefLpfLinearAccelCoeff());
-
-        if (fSensorLinearAccelerationEnabled) {
-            //linearAccelerationFilter = new ImuLaCfOrientation();
-            // TODO change this to a time constant
-            linearAccelerationFilter.setTimeConstant(getPrefImuLaCfOrienationCoeff());
-        }
-
-        androidLinearAccelerationEnabled = getPrefAndroidLinearAccelEnabled();
-    }
 
     private void resetSensorFrequencyTimer() {
         count = 0;
@@ -514,8 +391,6 @@ public abstract class FilterActivity extends Activity implements SensorEventList
      * medium, 2 = fast.
      */
     private void updateSensorDelay() {
-        getSensorFrequencyPrefs();
-
         setSensorDelay(frequencySelection);
     }
 }

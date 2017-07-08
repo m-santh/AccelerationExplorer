@@ -18,10 +18,75 @@ package com.kircherelectronics.accelerationexplorer.prefs;
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.hardware.SensorManager;
+import android.preference.PreferenceManager;
+
+import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
+import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
+
 public class PrefUtils
 {
-	public final static String SENSOR_FREQUENCY_PREF = "sensor_frequency_preference";
-	public final static String SENSOR_FREQUENCY_SLOW = "0";
-	public final static String SENSOR_FREQUENCY_MEDIUM = "1";
-	public final static String SENSOR_FREQUENCY_FAST = "2";
+
+
+	public static boolean getInvertAxisPrefs(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(FilterConfigActivity.AXIS_INVERSION_ENABLED_KEY, false);
+	}
+
+	public static boolean getPrefAndroidLinearAccelerationEnabled(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(FilterConfigActivity.ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+	}
+
+	public static boolean getPrefLpfLinearAccelerationEnabled(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(FilterConfigActivity.LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+	}
+
+    public static boolean getPrefFSensorLinearAccelerationEnabled(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(FilterConfigActivity.FSENSOR_LINEAR_ACCEL_ENABLED_KEY, false);
+    }
+
+    public static boolean getPrefLpfSmoothingEnabled(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(FilterConfigActivity.LPF_SMOOTHING_ENABLED_KEY, false);
+	}
+
+    public static float getPrefLpfSmoothingTimeConstant(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return Float.parseFloat(prefs.getString(FilterConfigActivity.LPF_SMOOTHING_TIME_CONSTANT_KEY, String.valueOf(0.5f)));
+	}
+
+    public static boolean getPrefMeanFilterSmoothingEnabled(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(FilterConfigActivity.MEAN_FILTER_SMOOTHING_ENABLED_KEY, false);
+	}
+
+    public static float getPrefMeanFilterSmoothingTimeConstant(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return Float.parseFloat(prefs.getString(FilterConfigActivity.MEAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY, String.valueOf(0.5f)));
+	}
+
+    public static boolean getPrefMedianFilterSmoothingEnabled(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(FilterConfigActivity.MEDIAN_FILTER_SMOOTHING_ENABLED_KEY, false);
+	}
+
+    public static float getPrefMedianFilterSmoothingTimeConstant(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return Float.parseFloat(prefs.getString(FilterConfigActivity.MEDIAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY, String.valueOf(0.5f)));
+	}
+
+    public static int getSensorFrequencyPrefs(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return Integer.parseInt(prefs.getString(FilterConfigActivity.SENSOR_FREQUENCY_KEY, String.valueOf(SensorManager.SENSOR_DELAY_FASTEST)));
+	}
+
+	public static int getFusionType(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getInt(FilterConfigActivity.SENSOR_FUSION_TYPE_KEY, AccelerationLiveData.FusionType.COMPLIMENTARY.getId());
+    }
 }

@@ -11,14 +11,14 @@ import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData
  */
 
 public class AccelerationViewModel extends AndroidViewModel {
-    LiveData<float[]> accelerationListener;
+    AccelerationLiveData<float[]> accelerationListener;
 
     public AccelerationViewModel(Application application) {
         super(application);
         accelerationListener = new AccelerationLiveData(application);
     }
 
-    public LiveData<float[]> getAccelerationListener() {
+    public AccelerationLiveData<float[]> getAccelerationListener() {
         return accelerationListener;
     }
 

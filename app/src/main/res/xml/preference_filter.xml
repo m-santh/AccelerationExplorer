@@ -14,7 +14,7 @@
         <ListPreference
             android:title="Sensor Frequency"
             android:key="sensor_frequency_preference"
-            android:defaultValue="2"
+            android:defaultValue="0"
             android:entries="@array/frequency"
             android:entryValues="@array/frequencyValues" />
     </PreferenceCategory>
@@ -28,7 +28,7 @@
             android:title="Enable Mean Filter" />
 
         <EditTextPreference
-            android:defaultValue="@string/default_value_mean_filter"
+            android:defaultValue="@string/default_value_time_constant"
             android:dialogMessage="Set Mean Filter Time Constant (Seconds)"
             android:dialogTitle="Time Constant"
             android:inputType="numberDecimal"
@@ -45,7 +45,7 @@
             android:title="Enable Median Filter" />
 
         <EditTextPreference
-            android:defaultValue="@string/default_value_mean_filter"
+            android:defaultValue="@string/default_value_time_constant"
             android:dialogMessage="Set Median Filter Time Constant (Seconds)"
             android:dialogTitle="Time Constant"
             android:inputType="numberDecimal"
@@ -62,7 +62,7 @@
             android:title="Enable Low Pass Filter" />
 
         <EditTextPreference
-            android:defaultValue="@string/default_value_low_pass_filter"
+            android:defaultValue="@string/default_value_time_constant"
             android:dialogMessage="Set LPF Time Constant (Seconds)"
             android:dialogTitle="Time Constant"
             android:inputType="numberDecimal"

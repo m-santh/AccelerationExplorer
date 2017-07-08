@@ -1,6 +1,7 @@
 package com.kircherelectronics.accelerationexplorer.activity;
 
 import android.app.Dialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,13 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
+import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
 import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
+import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
+import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
 import com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton;
-import com.kircherelectronics.fsensor.filter.averaging.MeanFilter;
+import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
 
 /*
  * Acceleration Explorer
@@ -45,193 +47,152 @@ import com.kircherelectronics.fsensor.filter.averaging.MeanFilter;
 /**
  * A class that provides a navigation menu to the features of Acceleration
  * Explorer.
- * 
- * @author Kaleb
  *
+ * @author Kaleb
  */
-public class HomeActivity extends AppCompatActivity implements SensorEventListener
-{
-	private final static String tag = HomeActivity.class.getSimpleName();
+public class HomeActivity extends AppCompatActivity  {
+    private final static String tag = HomeActivity.class.getSimpleName();
 
-	// The acceleration, in units of meters per second, as measured by the
-	// accelerometer.
-	private float[] acceleration = new float[3];
+    private AccelerationLiveData liveData;
 
-	// Handler for the UI plots so everything plots smoothly
-	private Handler handler;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	private Runnable runnable;
+        initViewModel();
 
-	// Sensor manager to access the accelerometer
-	private SensorManager sensorManager;
+        setContentView(R.layout.layout_home);
 
-	private GaugeAcceleration gaugeAcceleration;
+        initButtonGauge();
+        initButtonLogger();
+        initButtonVector();
+        initButtonSettings();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_home, menu);
+        return true;
+    }
 
-    private int accelerationDotColor;
+    /**
+     * Event Handling for Individual menu item selected Identify single menu
+     * item by it's id
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
+            // Start the vector activity
+            case R.id.action_help:
+                showHelpDialog();
+                return true;
 
-		setContentView(R.layout.layout_home);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-        this.accelerationDotColor = Color.parseColor("#2196F3");
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 
-		gaugeAcceleration = (GaugeAcceleration) findViewById(R.id.gauge_acceleration);
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateConfiguration();
+    }
 
-		initButtonGauge();
-		initButtonLogger();
-		initButtonVector();
+    private void initButtonGauge() {
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_gauge_mode);
 
-		sensorManager = (SensorManager) this
-				.getSystemService(Context.SENSOR_SERVICE);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        GaugeActivity.class);
 
-		handler = new Handler();
+                startActivity(intent);
+            }
+        });
+    }
 
-		runnable = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				handler.postDelayed(this, 20);
-                updateGauge();
-			}
-		};
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_home, menu);
-		return true;
-	}
-
-	/**
-	 * Event Handling for Individual menu item selected Identify single menu
-	 * item by it's id
-	 * */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-
-		// Start the vector activity
-		case R.id.action_help:
-			showHelpDialog();
-			return true;
-
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
-	@Override
-	public void onPause()
-	{
-		super.onPause();
-
-		sensorManager.unregisterListener(this);
-
-		handler.removeCallbacks(runnable);
-	}
-
-	@Override
-	public void onResume()
-	{
-		super.onResume();
-
-		sensorManager.registerListener(this,
-				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_FASTEST);
-
-		handler.post(runnable);
-	}
-
-	@Override
-	public void onSensorChanged(SensorEvent event)
-	{
-		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-		{
-			// Get a local copy of the acceleration measurements
-			System.arraycopy(event.values, 0, acceleration, 0,event.values.length);
-		}
-	}
-
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy)
-	{
-
-	}
-
-	private void initButtonGauge()
-	{
-		VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_gauge_mode);
-
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						GaugeActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
-	private void initButtonLogger()
-	{
+    private void initButtonLogger() {
         VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_logger_mode);
 
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						LoggerActivity.class);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        LoggerActivity.class);
 
-				startActivity(intent);
-			}
-		});
-	}
+                startActivity(intent);
+            }
+        });
+    }
 
-	private void initButtonVector()
-	{
+    private void initButtonVector() {
         VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_vector_mode);
 
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						VectorActivity.class);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        VectorActivity.class);
 
-				startActivity(intent);
-			}
-		});
-	}
+                startActivity(intent);
+            }
+        });
+    }
 
-	private void showHelpDialog()
-	{
-		Dialog helpDialog = new Dialog(this);
+    private void initButtonSettings() {
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_config_mode);
 
-		helpDialog.setCancelable(true);
-		helpDialog.setCanceledOnTouchOutside(true);
-		helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        FilterConfigActivity.class);
 
-		View view = getLayoutInflater()
-				.inflate(R.layout.layout_help_home, null);
+                startActivity(intent);
+            }
+        });
+    }
 
-		helpDialog.setContentView(view);
+    private void showHelpDialog() {
+        Dialog helpDialog = new Dialog(this);
 
-		helpDialog.show();
-	}
+        helpDialog.setCancelable(true);
+        helpDialog.setCanceledOnTouchOutside(true);
+        helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-	private void updateGauge() {
-        gaugeAcceleration.updatePoint(acceleration[0], acceleration[1], accelerationDotColor );
+        View view = getLayoutInflater()
+                .inflate(R.layout.layout_help_home, null);
+
+        helpDialog.setContentView(view);
+
+        helpDialog.show();
+    }
+
+    private void initViewModel() {
+        AccelerationViewModel model = ViewModelProviders.of(this).get(AccelerationViewModel.class);
+        liveData = model.getAccelerationListener();
+    }
+
+    private void updateConfiguration() {
+        liveData.setSensorFrequency(PrefUtils.getSensorFrequencyPrefs(this));
+        liveData.setAxisInverted(PrefUtils.getInvertAxisPrefs(this));
+
+        liveData.setFusionType(AccelerationLiveData.FusionType.values()[PrefUtils.getFusionType(this)]);
+
+        liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
+        liveData.enableFSensorLinearAcceleration(PrefUtils.getPrefFSensorLinearAccelerationEnabled(this));
+        liveData.enableLpfLinearAcceleration(PrefUtils.getPrefLpfLinearAccelerationEnabled(this));
+
+        liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
+        liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
+        liveData.enableLpfSmoothing(PrefUtils.getPrefLpfSmoothingEnabled(this));
+
+        liveData.setMeanFilterSmoothingTimeConstant(PrefUtils.getPrefMeanFilterSmoothingTimeConstant(this));
+        liveData.setMedianFilterSmoothingTimeConstant(PrefUtils.getPrefMedianFilterSmoothingTimeConstant(this));
+        liveData.setLpfSmoothingTimeConstant(PrefUtils.getPrefLpfSmoothingTimeConstant(this));
     }
 }

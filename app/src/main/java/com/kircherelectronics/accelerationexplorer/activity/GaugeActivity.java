@@ -116,12 +116,10 @@ public class GaugeActivity extends FilterActivity {
 
     private void updateGauges() {
         if (!fSensorLinearAccelerationEnabled && !androidLinearAccelerationEnabled) {
-            gaugeAcceleration.updatePoint(acceleration[0], acceleration[1],
-                    Color.rgb(255, 61, 0));
+            gaugeAcceleration.updatePoint(acceleration[0], acceleration[1]);
             gaugeRotation.updateRotation(acceleration);
         } else {
-            gaugeAcceleration.updatePoint(linearAcceleration[0],
-                    linearAcceleration[1], Color.rgb(255, 61, 0));
+            gaugeAcceleration.updatePoint(linearAcceleration[0], linearAcceleration[1]);
             gaugeRotation.updateRotation(linearAcceleration);
         }
     }

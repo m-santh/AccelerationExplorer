@@ -114,7 +114,7 @@ public final class GaugeAcceleration extends View
 	private float scaleX;
 	private float scaleY;
 
-	private int color = 0;
+	private int color = Color.parseColor("#2196F3");
 
 	/**
 	 * Create a new instance.
@@ -159,10 +159,9 @@ public final class GaugeAcceleration extends View
 	 *            the x-axis
 	 * @param y
 	 *            the y-axis
-	 * @param color
-	 *            the color
+
 	 */
-	public void updatePoint(float x, float y, int color)
+	public void updatePoint(float x, float y)
 	{
 		// Enforce a limit of 1g or 9.8 m/s^2
 		if (x > SensorManager.GRAVITY_EARTH)
@@ -184,8 +183,6 @@ public final class GaugeAcceleration extends View
 
 		this.x = scaleX * -x + rimRect.centerX();
 		this.y = scaleY * y + rimRect.centerY();
-
-		this.color = color;
 
 		this.invalidate();
 	}

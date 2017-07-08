@@ -2,7 +2,11 @@ package com.kircherelectronics.fsensor.filter.averaging;
 
 import android.util.Log;
 
+import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
+
 import java.util.ArrayDeque;
+import java.util.Arrays;
 
 /*
  * Copyright 2017, Kircher Electronics, LLC
@@ -75,7 +79,7 @@ public class MeanFilter extends AveragingFilter {
 
         int filterWindow = (int) Math.ceil(hz * timeConstant);
 
-        values.addLast(data);
+        values.addLast(Arrays.copyOf(data, data.length));
 
         while (values.size() > filterWindow) {
             values.removeFirst();
@@ -100,7 +104,7 @@ public class MeanFilter extends AveragingFilter {
         }
 
         for (int i = 0; i < mean.length; i++) {
-            mean[i] = mean[i] / data.size();
+            mean[i] /= data.size();
         }
 
         return mean;

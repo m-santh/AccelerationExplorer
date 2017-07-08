@@ -17,7 +17,7 @@
     <string name="sensor_name">Sensor</string>
     <string name="frequency_label">Frequency:</string>
     <string name="default_value">0.000</string>
-    <string name="default_value_mean_filter">1.0</string>
+    <string name="default_value_time_constant">0.5</string>
     <string name="default_value_low_pass_filter">0.5</string>
     <string name="x_axis_label">X-Axis</string>
     <string name="max_label">Max:</string>

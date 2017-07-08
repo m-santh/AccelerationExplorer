@@ -47,7 +47,10 @@ public class FilterConfigActivity extends PreferenceActivity implements
 			.getSimpleName();
 
 	public static final String AXIS_INVERSION_ENABLED_KEY = "axis_inversion_enabled_preference";
-	
+
+    public final static String SENSOR_FREQUENCY_KEY= "sensor_frequency_preference";
+    public final static String SENSOR_FUSION_TYPE_KEY = "sensor_fusion_type_preference";
+
 	// Preference keys for smoothing filters
 	public static final String MEAN_FILTER_SMOOTHING_ENABLED_KEY = "mean_filter_smoothing_enabled_preference";
 	public static final String MEAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY = "mean_filter_smoothing_time_constant_preference";
@@ -58,28 +61,14 @@ public class FilterConfigActivity extends PreferenceActivity implements
 
 	// Preference keys for linear acceleration filters
 	public static final String LPF_LINEAR_ACCEL_ENABLED_KEY = "lpf_linear_accel_enabled_preference";
-	public static final String LPF_LINEAR_ACCEL_COEFF_KEY = "lpf_linear_accel_coeff_preference";
-
+	public static final String FSENSOR_LINEAR_ACCEL_ENABLED_KEY = "fsesnor_linear_accel_enabled_preference";
 	public static final String ANDROID_LINEAR_ACCEL_ENABLED_KEY = "android_linear_accel_filter_preference";
 
-	public static final String IMULACF_ORIENTATION_ENABLED_KEY = "imulacf_orienation_enabled_preference";
-	public static final String IMULACF_ORIENTATION_COEFF_KEY = "imulacf_orienation_coeff_preference";
-
-	public static final String IMULACF_ROTATION_MATRIX_ENABLED_KEY = "imulacf_rotation_matrix_enabled_preference";
-	public static final String IMULACF_ROTATION_MATRIX_COEFF_KEY = "imulacf_rotation_matrix_coeff_preference";
-
-	public static final String IMULACF_QUATERNION_ENABLED_KEY = "imulacf_quaternion_enabled_preference";
-	public static final String IMULACF_QUATERNION_COEFF_KEY = "imulacf_quaternion_coeff_preference";
-
-	public static final String IMULAKF_QUATERNION_ENABLED_KEY = "imulakf_quaternion_enabled_preference";
 
 	private SwitchPreference spLpfLinearAccel;
 	private SwitchPreference spAndroidLinearAccel;
 
-	private SwitchPreference spImuLaCfOrientation;
-	private SwitchPreference spImuLaCfRotationMatrix;
-	private SwitchPreference spImuLaCfQuaternion;
-	private SwitchPreference spImuLaKfQuaternion;
+
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -88,16 +77,7 @@ public class FilterConfigActivity extends PreferenceActivity implements
 		addPreferencesFromResource(R.xml.preference_filter);
 
 		spLpfLinearAccel = (SwitchPreference) findPreference(LPF_LINEAR_ACCEL_ENABLED_KEY);
-
 		spAndroidLinearAccel = (SwitchPreference) findPreference(ANDROID_LINEAR_ACCEL_ENABLED_KEY);
-
-		spImuLaCfOrientation = (SwitchPreference) findPreference(IMULACF_ORIENTATION_ENABLED_KEY);
-
-		spImuLaCfRotationMatrix = (SwitchPreference) findPreference(IMULACF_ROTATION_MATRIX_ENABLED_KEY);
-
-		spImuLaCfQuaternion = (SwitchPreference) findPreference(IMULACF_QUATERNION_ENABLED_KEY);
-
-		spImuLaKfQuaternion = (SwitchPreference) findPreference(IMULAKF_QUATERNION_ENABLED_KEY);
 	}
 
 	@Override
@@ -134,177 +114,11 @@ public class FilterConfigActivity extends PreferenceActivity implements
 			{
 				Editor edit = sharedPreferences.edit();
 
-				edit.putBoolean(IMULACF_ORIENTATION_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_ROTATION_MATRIX_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(IMULAKF_QUATERNION_ENABLED_KEY, false);
 				edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
 
 				edit.apply();
 
-				spImuLaCfOrientation.setChecked(false);
-				spImuLaCfRotationMatrix.setChecked(false);
-				spImuLaCfQuaternion.setChecked(false);
-				spImuLaKfQuaternion.setChecked(false);
 				spAndroidLinearAccel.setChecked(false);
-			}
-		}
-
-		if (key.equals(IMULACF_ORIENTATION_ENABLED_KEY))
-		{
-			if (sharedPreferences.getBoolean(key, false))
-			{
-				Editor edit = sharedPreferences.edit();
-
-				edit.putBoolean(IMULACF_ROTATION_MATRIX_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(IMULAKF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-				edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-
-				edit.apply();
-
-				spImuLaCfRotationMatrix.setChecked(false);
-				spImuLaCfQuaternion.setChecked(false);
-				spImuLaKfQuaternion.setChecked(false);
-				spLpfLinearAccel.setChecked(false);
-				spAndroidLinearAccel.setChecked(false);
-			}
-		}
-
-		if (key.equals(IMULACF_ROTATION_MATRIX_ENABLED_KEY))
-		{
-			if (sharedPreferences.getBoolean(key, false))
-			{
-				Editor edit = sharedPreferences.edit();
-
-				edit.putBoolean(IMULACF_ORIENTATION_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(IMULAKF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-				edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-
-				edit.apply();
-
-				spImuLaCfOrientation.setChecked(false);
-				spImuLaCfQuaternion.setChecked(false);
-				spImuLaKfQuaternion.setChecked(false);
-				spLpfLinearAccel.setChecked(false);
-				spAndroidLinearAccel.setChecked(false);
-			}
-		}
-
-		if (key.equals(IMULAKF_QUATERNION_ENABLED_KEY))
-		{
-			if (sharedPreferences.getBoolean(key, false))
-			{
-				Editor edit = sharedPreferences.edit();
-
-				edit.putBoolean(IMULACF_ORIENTATION_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_ROTATION_MATRIX_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-				edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-
-				edit.apply();
-
-				spImuLaCfOrientation.setChecked(false);
-				spImuLaCfRotationMatrix.setChecked(false);
-				spLpfLinearAccel.setChecked(false);
-				spAndroidLinearAccel.setChecked(false);
-				spImuLaCfQuaternion.setChecked(false);
-			}
-		}
-
-		if (key.equals(IMULACF_QUATERNION_ENABLED_KEY))
-		{
-			if (sharedPreferences.getBoolean(key, false))
-			{
-				Editor edit = sharedPreferences.edit();
-
-				edit.putBoolean(IMULACF_ORIENTATION_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_ROTATION_MATRIX_ENABLED_KEY, false);
-				edit.putBoolean(IMULAKF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-				edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-
-				edit.apply();
-
-				spImuLaCfOrientation.setChecked(false);
-				spImuLaCfRotationMatrix.setChecked(false);
-				spLpfLinearAccel.setChecked(false);
-				spAndroidLinearAccel.setChecked(false);
-				spImuLaKfQuaternion.setChecked(false);
-			}
-		}
-
-		if (key.equals(ANDROID_LINEAR_ACCEL_ENABLED_KEY))
-		{
-			if (sharedPreferences.getBoolean(key, false))
-			{
-				Editor edit = sharedPreferences.edit();
-
-				edit.putBoolean(LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_ORIENTATION_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_ROTATION_MATRIX_ENABLED_KEY, false);
-				edit.putBoolean(IMULACF_QUATERNION_ENABLED_KEY, false);
-				edit.putBoolean(IMULAKF_QUATERNION_ENABLED_KEY, false);
-
-				edit.apply();
-
-				spImuLaCfOrientation.setChecked(false);
-				spImuLaCfRotationMatrix.setChecked(false);
-				spImuLaCfQuaternion.setChecked(false);
-				spImuLaKfQuaternion.setChecked(false);
-				spLpfLinearAccel.setChecked(false);
-			}
-		}
-
-		if (key.equals(IMULACF_ORIENTATION_COEFF_KEY))
-		{
-			if (Double.valueOf(sharedPreferences.getString(key, "0.5")) > 1)
-			{
-				sharedPreferences.edit().putString(key, "0.5").apply();
-
-				((EditTextPreference) findPreference(IMULACF_ORIENTATION_COEFF_KEY))
-						.setText("0.5");
-
-				Toast.makeText(
-						getApplicationContext(),
-						"Whoa! The filter constant must be less than or equal to 1",
-						Toast.LENGTH_LONG).show();
-			}
-		}
-
-		if (key.equals(IMULACF_ROTATION_MATRIX_COEFF_KEY))
-		{
-			if (Double.valueOf(sharedPreferences.getString(key, "0.5")) > 1)
-			{
-				sharedPreferences.edit().putString(key, "0.5").apply();
-
-				((EditTextPreference) findPreference(IMULACF_ROTATION_MATRIX_COEFF_KEY))
-						.setText("0.5");
-
-				Toast.makeText(
-						getApplicationContext(),
-						"Whoa! The filter constant must be less than or equal to 1",
-						Toast.LENGTH_LONG).show();
-			}
-		}
-
-		if (key.equals(IMULACF_QUATERNION_COEFF_KEY))
-		{
-			if (Double.valueOf(sharedPreferences.getString(key, "0.5")) > 1)
-			{
-				sharedPreferences.edit().putString(key, "0.5").apply();
-
-				((EditTextPreference) findPreference(IMULACF_QUATERNION_COEFF_KEY))
-						.setText("0.5");
-
-				Toast.makeText(
-						getApplicationContext(),
-						"Whoa! The filter constant must be less than or equal to 1",
-						Toast.LENGTH_LONG).show();
 			}
 		}
 	}

@@ -54,6 +54,7 @@
                 app:drawableBottomCompat="@drawable/ic_donut_large_white_48px"/>
 
             <com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton
+                android:id="@+id/button_config_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_settings"
@@ -63,17 +64,15 @@
                 app:drawableBottomCompat="@drawable/ic_settings_white_48px"/>
         </LinearLayout>
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration
-                android:id="@+id/gauge_acceleration"
+            <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.AccelerationGaugeFragment"
+                android:id="@+id/acceleration_gauge_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_status_bar" />
         </LinearLayout>
 
     </LinearLayout>

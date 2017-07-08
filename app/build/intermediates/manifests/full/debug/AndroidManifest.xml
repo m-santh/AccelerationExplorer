@@ -45,10 +45,6 @@
             android:name="com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="com.kircherelectronics.accelerationexplorer.activity.config.NoiseConfigActivity"
-            android:screenOrientation="portrait" >
-        </activity>
 
         <meta-data
             android:name="android.support.VERSION"

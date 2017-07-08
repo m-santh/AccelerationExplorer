@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-47:12
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
 	package
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:3:5-58
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
@@ -26,7 +26,7 @@ ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/Android
 	android:name
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:7:22-81
 application
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:9:5-45:19
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:9:5-41:19
 MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:support-v4:25.4.0] /Users/kaleb/.android/build-cache/20bdf5f18754bedf53d0969e43c5791beebef0a9/output/AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/df201e3d059406e3b505def68acd0a87ae0af565/output/AndroidManifest.xml:22:5-26:19
@@ -92,12 +92,6 @@ ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/Android
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:39:13-49
 	android:name
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:38:13-108
-activity#com.kircherelectronics.accelerationexplorer.activity.config.NoiseConfigActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:41:9-44:20
-	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:43:13-49
-	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:42:13-107
 uses-sdk
 INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:21:5-23:78
