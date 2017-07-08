@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 import com.kircherelectronics.fsensor.filter.averaging.AveragingFilter;
 import com.kircherelectronics.fsensor.filter.averaging.LowPassFilter;
@@ -40,8 +41,9 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
     private float[] rotation = new float[3];
 
     private boolean androidLinearAccelerationEnabled;
-    private boolean fSensorLinearAccelerationEnabled;
-    private boolean lpfLinearAccelerationEnabled;
+    private boolean fSensorComplimentaryLinearAccelerationEnabled;
+    private boolean fSensorKalmanLinearAccelerationEnabled;
+    private boolean fSensorLpfLinearAccelerationEnabled;
     private boolean axisInverted = false;
 
     private LowPassFilter lpfAccelerationSmoothing;
@@ -109,8 +111,9 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
 
         // Only one linear acceleration estimation at a time
         if(this.androidLinearAccelerationEnabled) {
-            this.fSensorLinearAccelerationEnabled = false;
-            this.lpfLinearAccelerationEnabled = false;
+            this.fSensorComplimentaryLinearAccelerationEnabled = false;
+            this.fSensorKalmanLinearAccelerationEnabled = false;
+            this.fSensorLpfLinearAccelerationEnabled = false;
         }
     }
 
@@ -118,32 +121,55 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
         return this.androidLinearAccelerationEnabled;
     }
 
-    public void enableFSensorLinearAcceleration(boolean enabled) {
-        this.fSensorLinearAccelerationEnabled = enabled;
+    public void enableFSensorComplimentaryLinearAcceleration(boolean enabled) {
+        unregisterSensors();
+        this.fSensorComplimentaryLinearAccelerationEnabled = enabled;
+        registerSensors(sensorFrequency);
 
         // Only one linear acceleration estimation at a time
-        if(this.fSensorLinearAccelerationEnabled) {
+        if(this.fSensorComplimentaryLinearAccelerationEnabled) {
             this.androidLinearAccelerationEnabled = false;
-            this.lpfLinearAccelerationEnabled = false;
+            this.fSensorKalmanLinearAccelerationEnabled = false;
+            this.fSensorLpfLinearAccelerationEnabled = false;
         }
     }
 
-    public boolean isFSensorLinearAccelerationEnabled() {
-        return this.fSensorLinearAccelerationEnabled;
+    public boolean isFSensorComplimentaryLinearAccelerationEnabled() {
+        return this.fSensorComplimentaryLinearAccelerationEnabled;
     }
 
-    public void enableLpfLinearAcceleration(boolean enabled) {
-        this.lpfLinearAccelerationEnabled = enabled;
+    public void enableFSensorKalmanLinearAcceleration(boolean enabled) {
+        unregisterSensors();
+        this.fSensorKalmanLinearAccelerationEnabled = enabled;
+        registerSensors(sensorFrequency);
 
         // Only one linear acceleration estimation at a time
-        if(this.lpfLinearAccelerationEnabled) {
+        if(this.fSensorKalmanLinearAccelerationEnabled) {
             this.androidLinearAccelerationEnabled = false;
-            this.fSensorLinearAccelerationEnabled = false;
+            this.fSensorComplimentaryLinearAccelerationEnabled = false;
+            this.fSensorLpfLinearAccelerationEnabled = false;
         }
     }
 
-    public boolean isLpfLinearAccelerationEnabled() {
-        return this.fSensorLinearAccelerationEnabled;
+    public boolean isFSensorKalmanLinearAccelerationEnabled() {
+        return this.fSensorKalmanLinearAccelerationEnabled;
+    }
+
+    public void enableFSensorLpfLinearAcceleration(boolean enabled) {
+        unregisterSensors();
+        this.fSensorLpfLinearAccelerationEnabled = enabled;
+        registerSensors(sensorFrequency);
+
+        // Only one linear acceleration estimation at a time
+        if(this.fSensorLpfLinearAccelerationEnabled) {
+            this.androidLinearAccelerationEnabled = false;
+            this.fSensorKalmanLinearAccelerationEnabled = false;
+            this.fSensorComplimentaryLinearAccelerationEnabled = false;
+        }
+    }
+
+    public boolean isfSensorLpfLinearAccelerationEnabled() {
+        return this.fSensorComplimentaryLinearAccelerationEnabled;
     }
 
     public void setMeanFilterSmoothingTimeConstant(float timeConstant) {
@@ -254,23 +280,24 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
     }
 
     private void processMagnetic(float[] magnetic) {
-        if (fSensorLinearAccelerationEnabled) {
+        System.arraycopy(magnetic, 0, this.magnetic, 0, magnetic.length);
+
+        if (fSensorComplimentaryLinearAccelerationEnabled) {
             // Get a local copy of the sensor values
-            System.arraycopy(magnetic, 0, this.magnetic, 0, magnetic.length);
             orientationFusionComplimentary.setMagneticField(this.magnetic);
+        } else if( fSensorKalmanLinearAccelerationEnabled) {
+            orientationFusionKalman.setMagneticField(this.magnetic);
         }
     }
 
     private void processRotation(float[] rotation) {
-        if (fSensorLinearAccelerationEnabled) {
-            // Get a local copy of the sensor values
-            System.arraycopy(rotation, 0, this.rotation, 0, rotation.length);
+        System.arraycopy(rotation, 0, this.rotation, 0, rotation.length);
 
-            if(fusionType == FusionType.COMPLIMENTARY) {
-                linearAccelerationFilterComplimentary.filter(this.rotation);
-            } else {
-                linearAccelerationFilterKalman.filter(this.rotation);
-            }
+        if (fSensorComplimentaryLinearAccelerationEnabled) {
+            // Get a local copy of the sensor values
+            orientationFusionComplimentary.filter(this.rotation);
+        } else if( fSensorKalmanLinearAccelerationEnabled) {
+            orientationFusionComplimentary.filter(this.rotation);
         }
     }
 
@@ -303,7 +330,7 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
                             SensorManager.SENSOR_DELAY_NORMAL);
                 }
 
-                if ((fSensorLinearAccelerationEnabled) && !androidLinearAccelerationEnabled) {
+                if ((fSensorComplimentaryLinearAccelerationEnabled || fSensorKalmanLinearAccelerationEnabled) && !androidLinearAccelerationEnabled) {
 
                     // Register for sensor updates.
                     sensorManager.registerListener(listener, sensorManager
@@ -332,7 +359,7 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
                             SensorManager.SENSOR_DELAY_GAME);
                 }
 
-                if ((fSensorLinearAccelerationEnabled) && !androidLinearAccelerationEnabled) {
+                if ((fSensorComplimentaryLinearAccelerationEnabled || fSensorKalmanLinearAccelerationEnabled) && !androidLinearAccelerationEnabled) {
 
                     // Register for sensor updates.
                     sensorManager.registerListener(listener, sensorManager
@@ -361,7 +388,7 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
                             SensorManager.SENSOR_DELAY_FASTEST);
                 }
 
-                if ((fSensorLinearAccelerationEnabled) && !androidLinearAccelerationEnabled) {
+                if ((fSensorComplimentaryLinearAccelerationEnabled || fSensorKalmanLinearAccelerationEnabled) && !androidLinearAccelerationEnabled) {
 
                     // Register for sensor updates.
                     sensorManager.registerListener(listener, sensorManager
@@ -399,18 +426,17 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-                if (fSensorLinearAccelerationEnabled) {
+                if (fSensorComplimentaryLinearAccelerationEnabled) {
                     float[] acceleration = new float[3];
                     System.arraycopy(event.values, 0, acceleration, 0, event.values.length);
-
-                    if(fusionType == FusionType.COMPLIMENTARY) {
-                        orientationFusionComplimentary.setAcceleration(acceleration);
-                        processAcceleration(linearAccelerationFilterComplimentary.filter(acceleration));
-                    } else {
-                        orientationFusionKalman.setAcceleration(acceleration);
-                        processAcceleration(linearAccelerationFilterKalman.filter(acceleration));
-                    }
-                } else if (lpfLinearAccelerationEnabled) {
+                    orientationFusionComplimentary.setAcceleration(acceleration);
+                    processAcceleration(linearAccelerationFilterComplimentary.filter(acceleration));
+                } else if(fSensorKalmanLinearAccelerationEnabled) {
+                    float[] acceleration = new float[3];
+                    System.arraycopy(event.values, 0, acceleration, 0, event.values.length);
+                    orientationFusionKalman.setAcceleration(acceleration);
+                    processAcceleration(linearAccelerationFilterKalman.filter(acceleration));
+                } else if (fSensorLpfLinearAccelerationEnabled) {
                     float[] acceleration = new float[3];
                     System.arraycopy(event.values, 0, acceleration, 0, event.values.length);
                     lpfGravity.filter(acceleration);

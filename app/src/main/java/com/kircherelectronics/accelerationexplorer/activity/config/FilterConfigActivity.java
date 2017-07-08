@@ -4,14 +4,10 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.kircherelectronics.accelerationexplorer.R;
 
@@ -60,8 +56,9 @@ public class FilterConfigActivity extends PreferenceActivity implements
 	public static final String LPF_SMOOTHING_TIME_CONSTANT_KEY = "lpf_smoothing_time_constant_preference";
 
 	// Preference keys for linear acceleration filters
-	public static final String LPF_LINEAR_ACCEL_ENABLED_KEY = "lpf_linear_accel_enabled_preference";
-	public static final String FSENSOR_LINEAR_ACCEL_ENABLED_KEY = "fsesnor_linear_accel_enabled_preference";
+	public static final String FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY = "lpf_linear_accel_enabled_preference";
+	public static final String FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY = "complimentary_fusion_enabled_preference";
+    public static final String FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY = "kalman_fusion_enabled_preference";
 	public static final String ANDROID_LINEAR_ACCEL_ENABLED_KEY = "android_linear_accel_filter_preference";
 
 
@@ -76,7 +73,7 @@ public class FilterConfigActivity extends PreferenceActivity implements
 
 		addPreferencesFromResource(R.xml.preference_filter);
 
-		spLpfLinearAccel = (SwitchPreference) findPreference(LPF_LINEAR_ACCEL_ENABLED_KEY);
+		spLpfLinearAccel = (SwitchPreference) findPreference(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY);
 		spAndroidLinearAccel = (SwitchPreference) findPreference(ANDROID_LINEAR_ACCEL_ENABLED_KEY);
 	}
 
@@ -108,7 +105,7 @@ public class FilterConfigActivity extends PreferenceActivity implements
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key)
 	{
-		if (key.equals(LPF_LINEAR_ACCEL_ENABLED_KEY))
+		if (key.equals(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY))
 		{
 			if (sharedPreferences.getBoolean(key, false))
 			{

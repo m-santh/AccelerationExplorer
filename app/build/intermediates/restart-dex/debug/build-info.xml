@@ -6,29 +6,22 @@
     density="xxhdpi"
     format="10"
     plugin-version="2.3.3"
-    timestamp="1499542062341"
+    timestamp="1499545293086"
     token="-411948792811712299"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="188" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="6" />
+        duration="0" />
     <task
         name="verifier"
-        duration="1" />
-
-    <artifact
-        location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
-        type="SPLIT" />
-    <artifact
-        location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/outputs/apk/app-debug.apk"
-        type="SPLIT_MAIN" />
+        duration="0" />
 
     <build
         build-mode="FULL"
@@ -89,29 +82,18 @@
         <artifact
             location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_2.apk"
             type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1499542858573"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
             type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
-        timestamp="1499538725926"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1499540532006"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1499541686024"
+        timestamp="1499543319526"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_8.apk"
@@ -119,22 +101,34 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1499541992998"
+        timestamp="1499544585318"
         verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1499545109826"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_3.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1499545226757"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_9.apk"
+            type="SPLIT" />
         <artifact
             location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/outputs/apk/app-debug.apk"
             type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
-        timestamp="1499542062341"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/split-apk/debug/slices/slice_1.apk"
-            type="SPLIT" />
-        <artifact
-            location="/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/outputs/apk/app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
+        timestamp="1499545293086"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

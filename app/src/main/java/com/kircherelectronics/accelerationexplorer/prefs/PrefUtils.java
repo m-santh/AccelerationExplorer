@@ -40,14 +40,19 @@ public class PrefUtils
 		return prefs.getBoolean(FilterConfigActivity.ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
 	}
 
-	public static boolean getPrefLpfLinearAccelerationEnabled(Context context) {
+	public static boolean getPrefFSensorLpfLinearAccelerationEnabled(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		return prefs.getBoolean(FilterConfigActivity.LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+		return prefs.getBoolean(FilterConfigActivity.FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
 	}
 
-    public static boolean getPrefFSensorLinearAccelerationEnabled(Context context) {
+    public static boolean getPrefFSensorComplimentaryLinearAccelerationEnabled(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getBoolean(FilterConfigActivity.FSENSOR_LINEAR_ACCEL_ENABLED_KEY, false);
+        return prefs.getBoolean(FilterConfigActivity.FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+    }
+
+    public static boolean getPrefFSensorKalmanLinearAccelerationEnabled(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(FilterConfigActivity.FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
     }
 
     public static boolean getPrefLpfSmoothingEnabled(Context context) {

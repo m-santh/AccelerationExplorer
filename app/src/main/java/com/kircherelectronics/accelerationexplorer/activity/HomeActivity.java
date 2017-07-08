@@ -2,15 +2,8 @@ package com.kircherelectronics.accelerationexplorer.activity;
 
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +13,6 @@ import android.view.Window;
 
 import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
-import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
 import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
 import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
 import com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton;
@@ -184,8 +176,9 @@ public class HomeActivity extends AppCompatActivity  {
         liveData.setFusionType(AccelerationLiveData.FusionType.values()[PrefUtils.getFusionType(this)]);
 
         liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
-        liveData.enableFSensorLinearAcceleration(PrefUtils.getPrefFSensorLinearAccelerationEnabled(this));
-        liveData.enableLpfLinearAcceleration(PrefUtils.getPrefLpfLinearAccelerationEnabled(this));
+        liveData.enableFSensorComplimentaryLinearAcceleration(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(this));
+        liveData.enableFSensorKalmanLinearAcceleration(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this));
+        liveData.enableFSensorLpfLinearAcceleration(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this));
 
         liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
         liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
