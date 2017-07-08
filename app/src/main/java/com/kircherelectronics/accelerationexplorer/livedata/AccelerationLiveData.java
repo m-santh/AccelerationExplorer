@@ -77,10 +77,18 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
         count = 0;
 
         registerSensors(sensorFrequency);
+
+        if(fSensorKalmanLinearAccelerationEnabled) {
+            orientationFusionKalman.startFusion();
+        }
     }
 
     @Override
     protected void onInactive(){
+        if(fSensorKalmanLinearAccelerationEnabled) {
+            orientationFusionKalman.stopFusion();
+        }
+
         unregisterSensors();
     }
 
@@ -111,6 +119,7 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
 
         // Only one linear acceleration estimation at a time
         if(this.androidLinearAccelerationEnabled) {
+            orientationFusionKalman.stopFusion();
             this.fSensorComplimentaryLinearAccelerationEnabled = false;
             this.fSensorKalmanLinearAccelerationEnabled = false;
             this.fSensorLpfLinearAccelerationEnabled = false;
@@ -128,6 +137,7 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
 
         // Only one linear acceleration estimation at a time
         if(this.fSensorComplimentaryLinearAccelerationEnabled) {
+            orientationFusionKalman.stopFusion();
             this.androidLinearAccelerationEnabled = false;
             this.fSensorKalmanLinearAccelerationEnabled = false;
             this.fSensorLpfLinearAccelerationEnabled = false;
@@ -145,9 +155,12 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
 
         // Only one linear acceleration estimation at a time
         if(this.fSensorKalmanLinearAccelerationEnabled) {
+            orientationFusionKalman.startFusion();
             this.androidLinearAccelerationEnabled = false;
             this.fSensorComplimentaryLinearAccelerationEnabled = false;
             this.fSensorLpfLinearAccelerationEnabled = false;
+        } else {
+            orientationFusionKalman.stopFusion();
         }
     }
 
@@ -162,6 +175,7 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
 
         // Only one linear acceleration estimation at a time
         if(this.fSensorLpfLinearAccelerationEnabled) {
+            orientationFusionKalman.stopFusion();
             this.androidLinearAccelerationEnabled = false;
             this.fSensorKalmanLinearAccelerationEnabled = false;
             this.fSensorComplimentaryLinearAccelerationEnabled = false;
@@ -296,8 +310,8 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
         if (fSensorComplimentaryLinearAccelerationEnabled) {
             // Get a local copy of the sensor values
             orientationFusionComplimentary.filter(this.rotation);
-        } else if( fSensorKalmanLinearAccelerationEnabled) {
-            orientationFusionComplimentary.filter(this.rotation);
+        } else if(fSensorKalmanLinearAccelerationEnabled) {
+            orientationFusionKalman.filter(this.rotation);
         }
     }
 
