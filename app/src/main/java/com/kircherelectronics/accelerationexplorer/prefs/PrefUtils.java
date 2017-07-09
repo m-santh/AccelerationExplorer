@@ -24,12 +24,9 @@ import android.hardware.SensorManager;
 import android.preference.PreferenceManager;
 
 import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
-import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
 
 public class PrefUtils
 {
-
-
 	public static boolean getInvertAxisPrefs(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(FilterConfigActivity.AXIS_INVERSION_ENABLED_KEY, false);
@@ -45,9 +42,19 @@ public class PrefUtils
 		return prefs.getBoolean(FilterConfigActivity.FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
 	}
 
+    public static float getPrefFSensorLpfLinearAccelerationTimeConstant(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return Float.parseFloat(prefs.getString(FilterConfigActivity.FSENSOR_LPF_LINEAR_ACCEL_TIME_CONSTANT_KEY, String.valueOf(0.5f)));
+    }
+
     public static boolean getPrefFSensorComplimentaryLinearAccelerationEnabled(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean(FilterConfigActivity.FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+    }
+
+    public static float getPrefFSensorComplimentaryLinearAccelerationTimeConstant(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return Float.parseFloat(prefs.getString(FilterConfigActivity.FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_TIME_CONSTANT_KEY, String.valueOf(0.5f)));
     }
 
     public static boolean getPrefFSensorKalmanLinearAccelerationEnabled(Context context) {
@@ -89,9 +96,4 @@ public class PrefUtils
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		return Integer.parseInt(prefs.getString(FilterConfigActivity.SENSOR_FREQUENCY_KEY, String.valueOf(SensorManager.SENSOR_DELAY_FASTEST)));
 	}
-
-	public static int getFusionType(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getInt(FilterConfigActivity.SENSOR_FUSION_TYPE_KEY, AccelerationLiveData.FusionType.COMPLIMENTARY.getId());
-    }
 }

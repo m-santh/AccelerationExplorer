@@ -1,9 +1,11 @@
 package com.kircherelectronics.accelerationexplorer.activity;
 
 import android.app.Dialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +17,9 @@ import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
 import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
 import com.kircherelectronics.accelerationexplorer.gauge.GaugeRotation;
+import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
+import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
+import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
 
 /*
  * Acceleration Explorer
@@ -40,33 +45,17 @@ import com.kircherelectronics.accelerationexplorer.gauge.GaugeRotation;
  *
  * @author Kaleb
  */
-public class GaugeActivity extends FilterActivity {
-    private GaugeAcceleration gaugeAcceleration;
-    private GaugeRotation gaugeRotation;
+public class GaugeActivity extends AppCompatActivity {
+
+    private AccelerationLiveData liveData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        initViewModel();
+
         setContentView(R.layout.layout_gauge);
-
-        textViewXAxis = (TextView) findViewById(R.id.value_x_axis);
-        textViewYAxis = (TextView) findViewById(R.id.value_y_axis);
-        textViewZAxis = (TextView) findViewById(R.id.value_z_axis);
-        textViewHzFrequency = (TextView) findViewById(R.id.value_hz_frequency);
-
-        gaugeAcceleration = (GaugeAcceleration) findViewById(R.id.gauge_acceleration);
-        gaugeRotation = (GaugeRotation) findViewById(R.id.gauge_rotation);
-
-        runable = new Runnable() {
-            @Override
-            public void run() {
-                handler.postDelayed(this, 25);
-
-                updateAccelerationText();
-                updateGauges();
-            }
-        };
     }
 
     @Override
@@ -99,6 +88,17 @@ public class GaugeActivity extends FilterActivity {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateConfiguration();
+    }
+
     private void showHelpDialog() {
         Dialog helpDialog = new Dialog(this);
 
@@ -114,13 +114,29 @@ public class GaugeActivity extends FilterActivity {
         helpDialog.show();
     }
 
-    private void updateGauges() {
-        if (!fSensorLinearAccelerationEnabled && !androidLinearAccelerationEnabled) {
-            gaugeAcceleration.updatePoint(acceleration[0], acceleration[1]);
-            gaugeRotation.updateRotation(acceleration);
-        } else {
-            gaugeAcceleration.updatePoint(linearAcceleration[0], linearAcceleration[1]);
-            gaugeRotation.updateRotation(linearAcceleration);
-        }
+    private void initViewModel() {
+        AccelerationViewModel model = ViewModelProviders.of(this).get(AccelerationViewModel.class);
+        liveData = model.getAccelerationListener();
+    }
+
+    private void updateConfiguration() {
+        liveData.setSensorFrequency(PrefUtils.getSensorFrequencyPrefs(this));
+        liveData.setAxisInverted(PrefUtils.getInvertAxisPrefs(this));
+
+        liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
+        liveData.enableFSensorComplimentaryLinearAcceleration(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(this));
+        liveData.enableFSensorKalmanLinearAcceleration(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this));
+        liveData.enableFSensorLpfLinearAcceleration(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this));
+
+        liveData.setFSensorComplimentaryLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationTimeConstant(this));
+        liveData.setFSensorLpfLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorLpfLinearAccelerationTimeConstant(this));
+
+        liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
+        liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
+        liveData.enableLpfSmoothing(PrefUtils.getPrefLpfSmoothingEnabled(this));
+
+        liveData.setMeanFilterSmoothingTimeConstant(PrefUtils.getPrefMeanFilterSmoothingTimeConstant(this));
+        liveData.setMedianFilterSmoothingTimeConstant(PrefUtils.getPrefMedianFilterSmoothingTimeConstant(this));
+        liveData.setLpfSmoothingTimeConstant(PrefUtils.getPrefLpfSmoothingTimeConstant(this));
     }
 }

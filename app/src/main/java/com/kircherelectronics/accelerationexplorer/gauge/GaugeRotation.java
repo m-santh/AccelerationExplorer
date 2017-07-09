@@ -42,10 +42,6 @@ public final class GaugeRotation extends View {
 
     // drawing tools
     private RectF rimOuterRect;
-    private RectF rimTopRect;
-    private RectF rimBottomRect;
-    private RectF rimLeftRect;
-    private RectF rimRightRect;
     private Paint rimOuterPaint;
 
     // Keep static bitmaps of the gauge so we only have to redraw if we have to
@@ -117,7 +113,7 @@ public final class GaugeRotation extends View {
      * @param rotation
      */
     public void updateRotation(float[] rotation) {
-        System.arraycopy(rotation, 0, this.rotation, 0, rotation.length);
+        System.arraycopy(rotation, 0, this.rotation, 0, this.rotation.length);
 
         this.rotation[0] = -this.rotation[0] / SensorManager.GRAVITY_EARTH;
         this.rotation[1] = -this.rotation[1] / SensorManager.GRAVITY_EARTH;
@@ -161,29 +157,9 @@ public final class GaugeRotation extends View {
                 + rimOuterSize, rimRect.right - rimOuterSize, rimRect.bottom
                 - rimOuterSize);
 
-        rimTopRect = new RectF(0.5f, 0.106f, 0.5f, 0.06f);
-        rimTopRect.set(rimTopRect.left + rimOuterSize, rimTopRect.top
-                        + rimOuterSize, rimTopRect.right - rimOuterSize,
-                rimTopRect.bottom - rimOuterSize);
-
-        rimBottomRect = new RectF(0.5f, 0.94f, 0.5f, 0.894f);
-        rimBottomRect.set(rimBottomRect.left + rimOuterSize, rimBottomRect.top
-                        + rimOuterSize, rimBottomRect.right - rimOuterSize,
-                rimBottomRect.bottom - rimOuterSize);
-
-        rimLeftRect = new RectF(0.106f, 0.5f, 0.06f, 0.5f);
-        rimLeftRect.set(rimLeftRect.left + rimOuterSize, rimLeftRect.top
-                        + rimOuterSize, rimLeftRect.right - rimOuterSize,
-                rimLeftRect.bottom - rimOuterSize);
-
-        rimRightRect = new RectF(0.94f, 0.5f, 0.894f, 0.5f);
-        rimRightRect.set(rimRightRect.left + rimOuterSize, rimRightRect.top
-                        + rimOuterSize, rimRightRect.right - rimOuterSize,
-                rimRightRect.bottom - rimOuterSize);
-
         rimOuterPaint = new Paint();
         rimOuterPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        rimOuterPaint.setColor(Color.rgb(255, 255, 255));
+        rimOuterPaint.setColor(Color.GRAY);
 
         float rimSize = 0.02f;
 
@@ -198,7 +174,7 @@ public final class GaugeRotation extends View {
         skyPaint = new Paint();
         skyPaint.setAntiAlias(true);
         skyPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        skyPaint.setColor(Color.WHITE);
+        skyPaint.setColor(Color.GRAY);
 
         backgroundPaint = new Paint();
         backgroundPaint.setFilterBitmap(true);
@@ -243,14 +219,6 @@ public final class GaugeRotation extends View {
         canvas.drawOval(rimOuterRect, rimOuterPaint);
         // Then draw the small black line
         canvas.drawOval(rimRect, rimPaint);
-
-        canvas.drawRect(rimTopRect, rimOuterPaint);
-        // bottom rect
-        canvas.drawRect(rimBottomRect, rimOuterPaint);
-        // left rect
-        canvas.drawRect(rimLeftRect, rimOuterPaint);
-        // right rect
-        canvas.drawRect(rimRightRect, rimOuterPaint);
     }
 
     /**

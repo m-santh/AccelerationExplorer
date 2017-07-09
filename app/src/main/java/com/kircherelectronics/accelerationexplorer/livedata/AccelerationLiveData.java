@@ -59,7 +59,6 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
 
     private int sensorFrequency = SensorManager.SENSOR_DELAY_FASTEST;
 
-    private FusionType fusionType = FusionType.COMPLIMENTARY;
 
     public AccelerationLiveData(Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -222,8 +221,12 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
         return this.lpfSmoothingEnabled;
     }
 
-    public void setFusionType(FusionType fusionType) {
-        this.fusionType = fusionType;
+    public void setFSensorComplimentaryLinearAccelerationTimeConstant(float timeConstant) {
+        linearAccelerationFilterComplimentary.setTimeConstant(timeConstant);
+    }
+
+    public void setFSensorLpfLinearAccelerationTimeConstant(float timeConstant) {
+        linearAccelerationFilterLpf.setTimeConstant(timeConstant);
     }
 
     private float calculateSensorFrequency() {

@@ -72,7 +72,7 @@
                 android:id="@+id/acceleration_gauge_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/fragment_status_bar" />
+                tools:layout="@layout/fragment_acceleration_gauge" />
         </LinearLayout>
 
     </LinearLayout>

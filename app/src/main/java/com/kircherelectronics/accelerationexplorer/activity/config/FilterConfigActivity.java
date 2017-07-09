@@ -31,92 +31,126 @@ import com.kircherelectronics.accelerationexplorer.R;
 
 /**
  * Preferences for the smoothing and linear acceleration filters.
- * 
- * @author Kaleb
  *
+ * @author Kaleb
  */
 public class FilterConfigActivity extends PreferenceActivity implements
-		OnSharedPreferenceChangeListener, OnPreferenceClickListener
-{
+        OnSharedPreferenceChangeListener, OnPreferenceClickListener {
 
-	private static final String tag = FilterConfigActivity.class
-			.getSimpleName();
+    private static final String tag = FilterConfigActivity.class
+            .getSimpleName();
 
-	public static final String AXIS_INVERSION_ENABLED_KEY = "axis_inversion_enabled_preference";
+    public static final String AXIS_INVERSION_ENABLED_KEY = "axis_inversion_enabled_preference";
 
-    public final static String SENSOR_FREQUENCY_KEY= "sensor_frequency_preference";
-    public final static String SENSOR_FUSION_TYPE_KEY = "sensor_fusion_type_preference";
+    public final static String SENSOR_FREQUENCY_KEY = "sensor_frequency_preference";
 
-	// Preference keys for smoothing filters
-	public static final String MEAN_FILTER_SMOOTHING_ENABLED_KEY = "mean_filter_smoothing_enabled_preference";
-	public static final String MEAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY = "mean_filter_smoothing_time_constant_preference";
-	public static final String MEDIAN_FILTER_SMOOTHING_ENABLED_KEY = "median_filter_smoothing_enabled_preference";
-	public static final String MEDIAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY = "median_filter_smoothing_time_constant_preference";
-	public static final String LPF_SMOOTHING_ENABLED_KEY = "lpf_smoothing_enabled_preference";
-	public static final String LPF_SMOOTHING_TIME_CONSTANT_KEY = "lpf_smoothing_time_constant_preference";
+    // Preference keys for smoothing filters
+    public static final String MEAN_FILTER_SMOOTHING_ENABLED_KEY = "mean_filter_smoothing_enabled_preference";
+    public static final String MEDIAN_FILTER_SMOOTHING_ENABLED_KEY = "median_filter_smoothing_enabled_preference";
+    public static final String LPF_SMOOTHING_ENABLED_KEY = "lpf_smoothing_enabled_preference";
 
-	// Preference keys for linear acceleration filters
-	public static final String FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY = "lpf_linear_accel_enabled_preference";
-	public static final String FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY = "complimentary_fusion_enabled_preference";
+    public static final String MEAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY = "mean_filter_smoothing_time_constant_preference";
+    public static final String MEDIAN_FILTER_SMOOTHING_TIME_CONSTANT_KEY = "median_filter_smoothing_time_constant_preference";
+    public static final String LPF_SMOOTHING_TIME_CONSTANT_KEY = "lpf_smoothing_time_constant_preference";
+
+    // Preference keys for linear acceleration filters
+    public static final String FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY = "lpf_linear_accel_enabled_preference";
+    public static final String FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY = "complimentary_fusion_enabled_preference";
     public static final String FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY = "kalman_fusion_enabled_preference";
-	public static final String ANDROID_LINEAR_ACCEL_ENABLED_KEY = "android_linear_accel_filter_preference";
+    public static final String ANDROID_LINEAR_ACCEL_ENABLED_KEY = "android_linear_accel_filter_enabled_preference";
 
+    public static final String FSENSOR_LPF_LINEAR_ACCEL_TIME_CONSTANT_KEY = "lpf_linear_accel_time_constant_preference";
+    public static final String FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_TIME_CONSTANT_KEY = "complimentary_fusion_time_constant_preference";
 
-	private SwitchPreference spLpfLinearAccel;
-	private SwitchPreference spAndroidLinearAccel;
+    private SwitchPreference fSensorLpfLinearAccel;
+    private SwitchPreference fSensorComplimentaryLinearAccel;
+    private SwitchPreference fSensorKalmanLinearAccel;
+    private SwitchPreference androidLinearAccel;
 
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        addPreferencesFromResource(R.xml.preference_filter);
 
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
+        fSensorComplimentaryLinearAccel = (SwitchPreference) findPreference
+                (FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY);
+        fSensorKalmanLinearAccel = (SwitchPreference) findPreference(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY);
+        fSensorLpfLinearAccel = (SwitchPreference) findPreference(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY);
+        androidLinearAccel = (SwitchPreference) findPreference(ANDROID_LINEAR_ACCEL_ENABLED_KEY);
+    }
 
-		addPreferencesFromResource(R.xml.preference_filter);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Set up a listener whenever a key changes
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
+    }
 
-		spLpfLinearAccel = (SwitchPreference) findPreference(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY);
-		spAndroidLinearAccel = (SwitchPreference) findPreference(ANDROID_LINEAR_ACCEL_ENABLED_KEY);
-	}
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister the listener whenever a key changes
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
 
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		// Set up a listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences()
-				.registerOnSharedPreferenceChangeListener(this);
-	}
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        return false;
+    }
 
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-		// Unregister the listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences()
-				.unregisterOnSharedPreferenceChangeListener(this);
-	}
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+                                          String key) {
+        if (key.equals(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY)) {
+            if (sharedPreferences.getBoolean(key, false)) {
+                fSensorKalmanLinearAccel.setChecked(false);
+                fSensorComplimentaryLinearAccel.setChecked(false);
+                androidLinearAccel.setChecked(false);
 
-	@Override
-	public boolean onPreferenceClick(Preference preference)
-	{
-		return false;
-	}
+                Editor edit = sharedPreferences.edit();
+                edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.apply();
+            }
+        } else if (key.equals(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY)) {
+            if (sharedPreferences.getBoolean(key, false)) {
+                fSensorKalmanLinearAccel.setChecked(false);
+                fSensorLpfLinearAccel.setChecked(false);
+                androidLinearAccel.setChecked(false);
 
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key)
-	{
-		if (key.equals(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY))
-		{
-			if (sharedPreferences.getBoolean(key, false))
-			{
-				Editor edit = sharedPreferences.edit();
+                Editor edit = sharedPreferences.edit();
+                edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.apply();
+            }
+        } else if (key.equals(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY)) {
+            if (sharedPreferences.getBoolean(key, false)) {
+                fSensorComplimentaryLinearAccel.setChecked(false);
+                fSensorLpfLinearAccel.setChecked(false);
+                androidLinearAccel.setChecked(false);
 
-				edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                Editor edit = sharedPreferences.edit();
+                edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.apply();
+            }
+        } else if (key.equals(ANDROID_LINEAR_ACCEL_ENABLED_KEY)) {
+            if (sharedPreferences.getBoolean(key, false)) {
+                fSensorComplimentaryLinearAccel.setChecked(false);
+                fSensorLpfLinearAccel.setChecked(false);
+                fSensorKalmanLinearAccel.setChecked(false);
 
-				edit.apply();
-
-				spAndroidLinearAccel.setChecked(false);
-			}
-		}
-	}
+                Editor edit = sharedPreferences.edit();
+                edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
+                edit.apply();
+            }
+        }
+    }
 }

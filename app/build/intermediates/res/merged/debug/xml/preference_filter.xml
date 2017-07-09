@@ -69,6 +69,15 @@
             android:key="lpf_smoothing_time_constant_preference"
             android:title="Set LPF Time Constant" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Android Linear Acceleration" >
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="Enable Android Linear Accel"
+            android:key="android_linear_accel_filter_preference"
+            android:summaryOff="Android Linear Accel is Off"
+            android:summaryOn="Android Linear Accel is On"
+            android:title="Enable Linear Accel Android" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="LPF Linear Acceleration" >
         <SwitchPreference
             android:defaultValue="false"
@@ -85,15 +94,6 @@
             android:inputType="numberDecimal"
             android:key="lpf_linear_accel_time_constant_preference"
             android:title="Set LPF Time Constant" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="Android Linear Acceleration" >
-        <SwitchPreference
-            android:defaultValue="false"
-            android:dialogTitle="Enable Android Linear Accel"
-            android:key="android_linear_accel_filter_preference"
-            android:summaryOff="Android Linear Accel is Off"
-            android:summaryOn="Android Linear Accel is On"
-            android:title="Enable Linear Accel Android" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Complimentary Fusion" >
         <SwitchPreference
@@ -120,14 +120,6 @@
             android:summaryOff="Fusion is Off"
             android:summaryOn="Fusion is On"
             android:title="Enable Kalman Fusion" />
-
-        <EditTextPreference
-            android:defaultValue="@string/default_value_low_pass_filter"
-            android:dialogMessage="Set Time Constant"
-            android:dialogTitle="Time Constant"
-            android:inputType="numberDecimal"
-            android:key="kalman_fusion_time_constant_preference"
-            android:title="Set Filter Time Constant" />
     </PreferenceCategory>
 
 </PreferenceScreen>
