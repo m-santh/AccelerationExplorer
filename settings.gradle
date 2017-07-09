@@ -1,1 +1,1 @@
-include ':app', ':fsensor'
+include ':app'

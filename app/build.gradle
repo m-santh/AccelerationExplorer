@@ -8,8 +8,8 @@ android {
         applicationId "com.kircherelectronics.accelerationexplorer"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode = 14
-        versionName = "3.2.5"
+        versionCode = 15
+        versionName = "3.2.7"
     }
 
     buildTypes {
@@ -23,8 +23,9 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:25.4.0'
     compile "com.android.support:appcompat-v7:25.4.0"
-    compile project(path: ':fsensor')
+    compile 'com.github.KalebKE:FSensor:v1.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    compile 'org.apache.commons:commons-csv:1.4'
     compile "android.arch.lifecycle:runtime:1.0.0-alpha3"
     compile "android.arch.lifecycle:extensions:1.0.0-alpha3"
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha3"

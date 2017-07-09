@@ -10,35 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
-import com.kircherelectronics.accelerationexplorer.gauge.GaugeRotation;
+import com.kircherelectronics.accelerationexplorer.plot.DynamicChart;
 import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
 
-/*
- * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 /**
- * Created by kaleb on 7/8/17.
+ * Created by kaleb on 7/9/17.
  */
 
-public class RotationGaugeFragment extends LifecycleFragment {
+public class LineChartFragment extends LifecycleFragment {
 
-    private GaugeRotation gaugeRotation;
+    // Graph plot for the UI outputs
+    private DynamicChart dynamicChart;
+
     private Handler handler;
     private Runnable runnable;
 
@@ -63,8 +48,8 @@ public class RotationGaugeFragment extends LifecycleFragment {
             @Override
             public void run()
             {
-                updateAccelerationGauge();
                 handler.postDelayed(this, 20);
+                dynamicChart.setAcceleration(acceleration);
             }
         };
 
@@ -73,9 +58,11 @@ public class RotationGaugeFragment extends LifecycleFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rotation_gauge, container, false);
+        View view = inflater.inflate(R.layout.fragment_line_chart, container, false);
 
-        gaugeRotation = (GaugeRotation) view.findViewById(R.id.gauge_rotation);
+        // Create the graph plot
+        LineChart plot = (LineChart) view.findViewById(R.id.line_chart);
+        dynamicChart = new DynamicChart(getContext(), plot);
 
         return view;
     }
@@ -83,6 +70,8 @@ public class RotationGaugeFragment extends LifecycleFragment {
     @Override
     public void onPause() {
         handler.removeCallbacks(runnable);
+        dynamicChart.onStopPlot();
+        dynamicChart.onPause();
         super.onPause();
     }
 
@@ -90,9 +79,7 @@ public class RotationGaugeFragment extends LifecycleFragment {
     public void onResume() {
         super.onResume();
         handler.post(runnable);
-    }
-
-    private void updateAccelerationGauge() {
-        gaugeRotation.updateRotation(acceleration);
+        dynamicChart.onResume();
+        dynamicChart.onStartPlot();
     }
 }

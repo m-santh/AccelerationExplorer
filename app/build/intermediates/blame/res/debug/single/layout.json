@@ -204,6 +204,10 @@
         "source": "/Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/res/layout/abc_action_bar_up_container.xml"
     },
     {
+        "merged": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/res/merged/debug/layout/fragment_line_chart.xml",
+        "source": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/res/layout/fragment_line_chart.xml"
+    },
+    {
         "merged": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
         "source": "/Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/res/layout/abc_activity_chooser_view.xml"
     },
