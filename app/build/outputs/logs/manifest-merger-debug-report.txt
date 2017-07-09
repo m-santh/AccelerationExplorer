@@ -1,111 +1,141 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-60:12
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
 	package
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:3:5-58
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:5:5-32
-		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
-	android:versionCode
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:4:5-29
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:11-69
-uses-sdk
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:7:5-9:41
-MERGED from [com.android.support:support-v4:23.0.0] /Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/AndroidManifest.xml:20:5-43
-	android:targetSdkVersion
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:9:9-38
-		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
-	android:minSdkVersion
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:8:9-35
+	android:versionCode
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.VIBRATE
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:11:5-66
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:5:5-66
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:11:22-63
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:5:22-63
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:12:5-81
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:6:5-81
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:12:22-78
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:6:22-78
 uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:13:5-84
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:7:5-84
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:13:22-81
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:7:22-81
 application
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:15:5-58:19
-MERGED from [com.android.support:support-v4:23.0.0] /Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/AndroidManifest.xml:22:5-20
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:9:5-41:19
+MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:25.4.0] /Users/kaleb/.android/build-cache/20bdf5f18754bedf53d0969e43c5791beebef0a9/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/df201e3d059406e3b505def68acd0a87ae0af565/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/7c2f2a5ad9c0baa04ff8836c062fde486e719995/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.github.KalebKE:FSensor:v1.0] /Users/kaleb/.android/build-cache/c8a69c03260104e6050b53343a12bc41ef51337c/output/AndroidManifest.xml:11:5-15:19
+MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:26:5-32:19
+MERGED from [com.android.support:support-fragment:25.4.0] /Users/kaleb/.android/build-cache/91fb0137532716c865d659fee544f8010aeb8c9d/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:25.4.0] /Users/kaleb/.android/build-cache/5c0621103c1655073c7e8e8e72fe06bee97fd902/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:25.4.0] /Users/kaleb/.android/build-cache/377a2774e697b2bbbfa52b88bd1361ba442c727b/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:25.4.0] /Users/kaleb/.android/build-cache/72e780e39671311ff77a8882c3b112462d4660d3/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:25.4.0] /Users/kaleb/.android/build-cache/cdbef325bf05327a55b5b7ca9ef54134dbfbed58/output/AndroidManifest.xml:25:5-29:19
 	android:label
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:18:9-41
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:12:9-41
+	android:supportsRtl
+		ADDED from [com.github.KalebKE:FSensor:v1.0] /Users/kaleb/.android/build-cache/c8a69c03260104e6050b53343a12bc41ef51337c/output/AndroidManifest.xml:14:9-35
 	android:allowBackup
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:16:9-35
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:10:9-35
 	android:icon
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:17:9-47
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:11:9-47
+	android:theme
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:13:9-40
 activity#com.kircherelectronics.accelerationexplorer.activity.HomeActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:19:9-29:20
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:14:9-24:20
 	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:23:13-49
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:18:13-49
 	android:label
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:22:13-45
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:17:13-45
 	android:configChanges
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:21:13-63
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:16:13-63
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:20:13-93
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:15:13-93
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:24:13-28:29
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:19:13-23:29
 action#android.intent.action.MAIN
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:25:17-69
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:20:17-69
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:25:25-66
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:20:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:27:17-77
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:22:17-77
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:27:27-74
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:22:27-74
 activity#com.kircherelectronics.accelerationexplorer.activity.LoggerActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:30:9-33:20
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:25:9-28:20
 	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:32:13-49
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:27:13-49
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:31:13-95
-activity#com.kircherelectronics.accelerationexplorer.activity.DiagnosticActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:34:9-37:20
-	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:36:13-49
-	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:35:13-99
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:26:13-95
 activity#com.kircherelectronics.accelerationexplorer.activity.VectorActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:38:9-41:20
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:29:9-32:20
 	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:40:13-49
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:31:13-49
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:39:13-95
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:30:13-95
 activity#com.kircherelectronics.accelerationexplorer.activity.GaugeActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:42:9-45:20
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:33:9-36:20
 	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:44:13-49
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:35:13-49
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:43:13-94
-activity#com.kircherelectronics.accelerationexplorer.activity.NoiseActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:46:9-49:20
-	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:48:13-49
-	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:47:13-94
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:34:13-94
 activity#com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:50:9-53:20
+ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:37:9-40:20
 	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:52:13-49
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:39:13-49
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:51:13-108
-activity#com.kircherelectronics.accelerationexplorer.activity.config.NoiseConfigActivity
-ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:54:9-57:20
-	android:screenOrientation
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:56:13-49
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:38:13-108
+uses-sdk
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.4.0] /Users/kaleb/.android/build-cache/20bdf5f18754bedf53d0969e43c5791beebef0a9/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/df201e3d059406e3b505def68acd0a87ae0af565/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/7c2f2a5ad9c0baa04ff8836c062fde486e719995/output/AndroidManifest.xml:20:5-43
+MERGED from [com.github.KalebKE:FSensor:v1.0] /Users/kaleb/.android/build-cache/c8a69c03260104e6050b53343a12bc41ef51337c/output/AndroidManifest.xml:7:5-9:41
+MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.lifecycle:runtime:1.0.0-alpha3] /Users/kaleb/.android/build-cache/ba87fc0f622f50841c46d594b747ca384290ccf3/output/AndroidManifest.xml:22:5-24:41
+MERGED from [android.arch.core:core:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d3ee716bcec32f5b22e0723459fab1a54d8e6301/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-fragment:25.4.0] /Users/kaleb/.android/build-cache/91fb0137532716c865d659fee544f8010aeb8c9d/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.4.0] /Users/kaleb/.android/build-cache/5c0621103c1655073c7e8e8e72fe06bee97fd902/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.4.0] /Users/kaleb/.android/build-cache/377a2774e697b2bbbfa52b88bd1361ba442c727b/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.4.0] /Users/kaleb/.android/build-cache/72e780e39671311ff77a8882c3b112462d4660d3/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.4.0] /Users/kaleb/.android/build-cache/cdbef325bf05327a55b5b7ca9ef54134dbfbed58/output/AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:25.4.0] /Users/kaleb/.android/build-cache/20bdf5f18754bedf53d0969e43c5791beebef0a9/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/df201e3d059406e3b505def68acd0a87ae0af565/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/kaleb/.android/build-cache/7c2f2a5ad9c0baa04ff8836c062fde486e719995/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-fragment:25.4.0] /Users/kaleb/.android/build-cache/91fb0137532716c865d659fee544f8010aeb8c9d/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:25.4.0] /Users/kaleb/.android/build-cache/5c0621103c1655073c7e8e8e72fe06bee97fd902/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:25.4.0] /Users/kaleb/.android/build-cache/377a2774e697b2bbbfa52b88bd1361ba442c727b/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:25.4.0] /Users/kaleb/.android/build-cache/72e780e39671311ff77a8882c3b112462d4660d3/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:25.4.0] /Users/kaleb/.android/build-cache/cdbef325bf05327a55b5b7ca9ef54134dbfbed58/output/AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:28:13-35
 	android:name
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:55:13-107
+		ADDED from [com.android.support:appcompat-v7:25.4.0] /Users/kaleb/.android/build-cache/0d86fc797acd4246c1586b085e9c86640d74db98/output/AndroidManifest.xml:27:13-51
+provider#android.arch.lifecycle.LifecycleRuntimeTrojanProvider
+ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:27:9-31:43
+	android:authorities
+		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:29:13-68
+	android:multiprocess
+		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:31:13-40
+	android:exported
+		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha3] /Users/kaleb/.android/build-cache/d897bc0da77dfd7cd96b97d73accb0b3befc9f1e/output/AndroidManifest.xml:28:13-81

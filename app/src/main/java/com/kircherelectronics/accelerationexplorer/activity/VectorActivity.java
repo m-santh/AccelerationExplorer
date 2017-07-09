@@ -1,8 +1,10 @@
 package com.kircherelectronics.accelerationexplorer.activity;
 
 import android.app.Dialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,24 +13,26 @@ import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
-import com.kircherelectronics.accelerationexplorer.view.AccelerationVectorView;
+import com.kircherelectronics.accelerationexplorer.gauge.GaugeVector;
+import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
+import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
+import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
 
 /*
- * Acceleration Explorer
- * Copyright (C) 2013-2015, Kaleb Kircher - Kircher Engineering, LLC
+ * AccelerationExplorer
+ * Copyright 2017 Kircher Electronics, LLC
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 /**
@@ -37,35 +41,18 @@ import com.kircherelectronics.accelerationexplorer.view.AccelerationVectorView;
  * @author Kaleb
  * 
  */
-public class VectorActivity extends FilterActivity
+public class VectorActivity extends AppCompatActivity
 {
-	private AccelerationVectorView view;
+    private AccelerationLiveData liveData;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 
+		initViewModel();
+
 		setContentView(R.layout.layout_vector);
-
-		textViewXAxis = (TextView) findViewById(R.id.value_x_axis);
-		textViewYAxis = (TextView) findViewById(R.id.value_y_axis);
-		textViewZAxis = (TextView) findViewById(R.id.value_z_axis);
-		textViewHzFrequency = (TextView) findViewById(R.id.value_hz_frequency);
-
-		view = (AccelerationVectorView) findViewById(R.id.vector_acceleration);
-
-		runable = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				handler.postDelayed(this, 100);
-
-				updateAccelerationText();
-				updateVector();
-			}
-		};
 	}
 
 	@Override
@@ -101,6 +88,17 @@ public class VectorActivity extends FilterActivity
 		}
 	}
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateConfiguration();
+    }
+
 	private void showHelpDialog()
 	{
 		Dialog helpDialog = new Dialog(this);
@@ -115,17 +113,29 @@ public class VectorActivity extends FilterActivity
 		helpDialog.show();
 	}
 
-	private void updateVector()
-	{
-		if (!lpfLinearAccelEnabled && !imuLaCfOrienationEnabled
-				&& !imuLaCfRotationMatrixEnabled && !imuLaCfQuaternionEnabled
-				&& !imuLaKfQuaternionEnabled && !androidLinearAccelEnabled)
-		{
-			view.updatePoint(acceleration[0], acceleration[1]);
-		}
-		else
-		{
-			view.updatePoint(linearAcceleration[0], linearAcceleration[1]);
-		}
+	private void initViewModel() {
+		AccelerationViewModel model = ViewModelProviders.of(this).get(AccelerationViewModel.class);
+		liveData = model.getAccelerationListener();
+	}
+
+	private void updateConfiguration() {
+		liveData.setSensorFrequency(PrefUtils.getSensorFrequencyPrefs(this));
+		liveData.setAxisInverted(PrefUtils.getInvertAxisPrefs(this));
+
+		liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
+		liveData.enableFSensorComplimentaryLinearAcceleration(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(this));
+		liveData.enableFSensorKalmanLinearAcceleration(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this));
+		liveData.enableFSensorLpfLinearAcceleration(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this));
+
+		liveData.setFSensorComplimentaryLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationTimeConstant(this));
+		liveData.setFSensorLpfLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorLpfLinearAccelerationTimeConstant(this));
+
+		liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
+		liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
+		liveData.enableLpfSmoothing(PrefUtils.getPrefLpfSmoothingEnabled(this));
+
+		liveData.setMeanFilterSmoothingTimeConstant(PrefUtils.getPrefMeanFilterSmoothingTimeConstant(this));
+		liveData.setMedianFilterSmoothingTimeConstant(PrefUtils.getPrefMedianFilterSmoothingTimeConstant(this));
+		liveData.setLpfSmoothingTimeConstant(PrefUtils.getPrefLpfSmoothingTimeConstant(this));
 	}
 }

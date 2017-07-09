@@ -1,281 +1,191 @@
 package com.kircherelectronics.accelerationexplorer.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.filter.MeanFilterSmoothing;
+import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
+import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
+import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
+import com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton;
+import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
 
 /*
- * Acceleration Explorer
- * Copyright (C) 2013-2015, Kaleb Kircher - Kircher Engineering, LLC
+ * AccelerationExplorer
+ * Copyright 2017 Kircher Electronics, LLC
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 /**
  * A class that provides a navigation menu to the features of Acceleration
  * Explorer.
- * 
- * @author Kaleb
  *
+ * @author Kaleb
  */
-public class HomeActivity extends Activity implements SensorEventListener
-{
-	private final static String tag = HomeActivity.class.getSimpleName();
+public class HomeActivity extends AppCompatActivity  {
+    private final static String tag = HomeActivity.class.getSimpleName();
 
-	// The acceleration, in units of meters per second, as measured by the
-	// accelerometer.
-	private float[] acceleration = new float[3];
+    private AccelerationLiveData liveData;
 
-	// Handler for the UI plots so everything plots smoothly
-	private Handler handler;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	private MeanFilterSmoothing meanFilter;
+        initViewModel();
 
-	private Runnable runable;
+        setContentView(R.layout.layout_home);
 
-	// Sensor manager to access the accelerometer
-	private SensorManager sensorManager;
+        initButtonGauge();
+        initButtonLogger();
+        initButtonVector();
+        initButtonSettings();
+    }
 
-	// Text views for real-time output
-	private TextView textViewXAxis;
-	private TextView textViewYAxis;
-	private TextView textViewZAxis;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_home, menu);
+        return true;
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
+    /**
+     * Event Handling for Individual menu item selected Identify single menu
+     * item by it's id
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
-		setContentView(R.layout.layout_home);
+            // Start the vector activity
+            case R.id.action_help:
+                showHelpDialog();
+                return true;
 
-		textViewXAxis = (TextView) findViewById(R.id.value_x_axis);
-		textViewYAxis = (TextView) findViewById(R.id.value_y_axis);
-		textViewZAxis = (TextView) findViewById(R.id.value_z_axis);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-		initButtonDiagnostic();
-		initButtonGauge();
-		initButtonLogger();
-		initButtonNoise();
-		initButtonVector();
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 
-		meanFilter = new MeanFilterSmoothing();
-		meanFilter.setTimeConstant(0.2f);
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateConfiguration();
+    }
 
-		sensorManager = (SensorManager) this
-				.getSystemService(Context.SENSOR_SERVICE);
+    private void initButtonGauge() {
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_gauge_mode);
 
-		handler = new Handler();
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        GaugeActivity.class);
 
-		runable = new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				handler.postDelayed(this, 100);
+                startActivity(intent);
+            }
+        });
+    }
 
-				updateAccelerationText();
-			}
-		};
-	}
+    private void initButtonLogger() {
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_logger_mode);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_home, menu);
-		return true;
-	}
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        LoggerActivity.class);
 
-	/**
-	 * Event Handling for Individual menu item selected Identify single menu
-	 * item by it's id
-	 * */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
+                startActivity(intent);
+            }
+        });
+    }
 
-		// Start the vector activity
-		case R.id.action_help:
-			showHelpDialog();
-			return true;
+    private void initButtonVector() {
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_vector_mode);
 
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        VectorActivity.class);
 
-	@Override
-	public void onPause()
-	{
-		super.onPause();
+                startActivity(intent);
+            }
+        });
+    }
 
-		sensorManager.unregisterListener(this);
+    private void initButtonSettings() {
+        VectorDrawableButton button = (VectorDrawableButton) this.findViewById(R.id.button_config_mode);
 
-		handler.removeCallbacks(runable);
-	}
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,
+                        FilterConfigActivity.class);
 
-	@Override
-	public void onResume()
-	{
-		super.onResume();
+                startActivity(intent);
+            }
+        });
+    }
 
-		sensorManager.registerListener(this,
-				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_NORMAL);
+    private void showHelpDialog() {
+        Dialog helpDialog = new Dialog(this);
 
-		handler.post(runable);
-	}
+        helpDialog.setCancelable(true);
+        helpDialog.setCanceledOnTouchOutside(true);
+        helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-	@Override
-	public void onSensorChanged(SensorEvent event)
-	{
-		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-		{
-			// Get a local copy of the acceleration measurements
-			System.arraycopy(event.values, 0, acceleration, 0,
-					event.values.length);
+        View view = getLayoutInflater()
+                .inflate(R.layout.layout_help_home, null);
 
-			acceleration = meanFilter.addSamples(acceleration);
-		}
-	}
+        helpDialog.setContentView(view);
 
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy)
-	{
+        helpDialog.show();
+    }
 
-	}
+    private void initViewModel() {
+        AccelerationViewModel model = ViewModelProviders.of(this).get(AccelerationViewModel.class);
+        liveData = model.getAccelerationListener();
+    }
 
-	private void initButtonGauge()
-	{
-		Button button = (Button) this.findViewById(R.id.button_gauge_mode);
+    private void updateConfiguration() {
+        liveData.setSensorFrequency(PrefUtils.getSensorFrequencyPrefs(this));
+        liveData.setAxisInverted(PrefUtils.getInvertAxisPrefs(this));
 
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						GaugeActivity.class);
+        liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
+        liveData.enableFSensorComplimentaryLinearAcceleration(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(this));
+        liveData.enableFSensorKalmanLinearAcceleration(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this));
+        liveData.enableFSensorLpfLinearAcceleration(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this));
 
-				startActivity(intent);
-			}
-		});
-	}
+        liveData.setFSensorComplimentaryLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationTimeConstant(this));
+        liveData.setFSensorLpfLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorLpfLinearAccelerationTimeConstant(this));
 
-	private void initButtonDiagnostic()
-	{
-		Button button = (Button) this.findViewById(R.id.button_diagnostic_mode);
+        liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
+        liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
+        liveData.enableLpfSmoothing(PrefUtils.getPrefLpfSmoothingEnabled(this));
 
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						DiagnosticActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
-	private void initButtonLogger()
-	{
-		Button button = (Button) this.findViewById(R.id.button_logger_mode);
-
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						LoggerActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
-	private void initButtonNoise()
-	{
-		Button button = (Button) this.findViewById(R.id.button_noise_mode);
-
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						NoiseActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
-	private void initButtonVector()
-	{
-		Button button = (Button) this.findViewById(R.id.button_vector_mode);
-
-		button.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				Intent intent = new Intent(HomeActivity.this,
-						VectorActivity.class);
-
-				startActivity(intent);
-			}
-		});
-	}
-
-	private void showHelpDialog()
-	{
-		Dialog helpDialog = new Dialog(this);
-
-		helpDialog.setCancelable(true);
-		helpDialog.setCanceledOnTouchOutside(true);
-		helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-		View view = getLayoutInflater()
-				.inflate(R.layout.layout_help_home, null);
-
-		helpDialog.setContentView(view);
-
-		helpDialog.show();
-	}
-
-	private void updateAccelerationText()
-	{
-		// Update the acceleration data
-		textViewXAxis.setText(String.format("%.2f", acceleration[0]));
-		textViewYAxis.setText(String.format("%.2f", acceleration[1]));
-		textViewZAxis.setText(String.format("%.2f", acceleration[2]));
-	}
+        liveData.setMeanFilterSmoothingTimeConstant(PrefUtils.getPrefMeanFilterSmoothingTimeConstant(this));
+        liveData.setMedianFilterSmoothingTimeConstant(PrefUtils.getPrefMedianFilterSmoothingTimeConstant(this));
+        liveData.setLpfSmoothingTimeConstant(PrefUtils.getPrefLpfSmoothingTimeConstant(this));
+    }
 }

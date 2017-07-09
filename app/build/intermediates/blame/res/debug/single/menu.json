@@ -8,12 +8,12 @@
         "source": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/res/menu/menu_logger.xml"
     },
     {
-        "merged": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/res/merged/debug/menu/menu_vector.xml",
-        "source": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/res/menu/menu_vector.xml"
-    },
-    {
         "merged": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/res/merged/debug/menu/menu_noise.xml",
         "source": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/res/menu/menu_noise.xml"
+    },
+    {
+        "merged": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/res/merged/debug/menu/menu_vector.xml",
+        "source": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/res/menu/menu_vector.xml"
     },
     {
         "merged": "/Users/kaleb/StudioProjects/AccelerationExplorer/app/build/intermediates/res/merged/debug/menu/menu_gauges.xml",
