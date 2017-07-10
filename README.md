@@ -3,6 +3,10 @@ AccelerationExplorer
 
 ![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_home.png "Android Acceleration Explorer Screenshot")
 
+# Backed by FSensor
+
+The lastest release of Acceleration explorer is now backed by [FSensor](https://github.com/KalebKE/FSensor/blob/master/README.md). FSensor (FusionSensor) is an Android library that (hopefully) removes some/most of the complexity of using Androids orientation sensors (Acceleration, Magnetic and Gyroscope). You can now just link FSensor to your project and get coding. No more having to wade through dense code to pick the parts you need.
+
 # Introduction
 
 Acceleration Explorer is an open source Android application with two different purposes. 
@@ -50,20 +54,6 @@ The vector plots the acceleration as a vector (a line with a direction and magni
 
 The gauges plot the acceleration of the x and y axis in terms of tilt and acceleration relative to 1g, or 9.8 meters/sec^2. One of the key limitations of acceleration sensors is the inability to differentiate tilt from linear acceleration.
 
-### The Noise
-
-![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_noise.png "Android Acceleration Explorer Screenshot")
-
-The noise allows the performance of different smoothing filters relative to the raw data can be compared simultaneously. A low-pass filter, a mean filter and a median filter are available and can be configured in terms of a time constant. The performance metric is the root-mean-squared (RMS) of the outputs. It is essentially the average variance from the mean of the data.
-
-### The Diagnostic
-
-![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_diagnostic.png "Android Acceleration Explorer Screenshot")
-
-Acceleration Explorer has a diagnostic mode intended to help the user discover the noise, offset and skew associated with the acceleration sensor. After a quick calibration process, Acceleration Explorer will calculate the magnitude, accuracy and noise of each axis of the sensor. Acceleration Explorer also determines the minimum and maximum amplitudes of each axis along with the update frequency of the acceleration sensor. This can be very useful for developers and other interested parties that need to compare the performance of acceleration devices equipped on different devices. It can also be useful in determining what digital filters and other calibrations might help the acceleration sensor to improve the sensors performance and accuracy.
-
-For more information on sensor offset and skew, see [here](http://www.kircherelectronics.com/blog/index.php/11-android/sensors/7-android-accelerometer). For more information on how to compenstate for sensor offset and skew, see [here](http://www.kircherelectronics.com/blog/index.php/11-android/sensors/14-sensor-skew-and-offset-ellipsoidfit).
-
 ## Smoothing filters
 
 Acceleration Explorer implements three of the most common smoothing filters, low-pass, mean and meadian filters. All the filters are user configurable based on the time constant in units of seconds. The larger the time constant, the smoother the signal. However, latency also increases with the time constant. Because the filter coefficient is in the time domain, differences in sensor output frequencies have little effect on the performance of the filter. These filters should perform about the same across all devices regardless of the sensor frequency.
@@ -79,10 +69,6 @@ Acceleration Explorer implements a mean filter designed to smooth the data point
 ### Median Filter
 
 Acceleration Explorer usees a median filter designed to smooth the data points based on a timeconstant in units of seconds. The median filter will take the median of the samples that occur over a period defined by the time constant... the number of samples that are considered is known as the filter window. The approach allows the filter window to be defined over a period of time, instead of a fixed number of samples.
-
-### Comparing Smoothing Filter Performance
-
-The Noise Activity within Acceleration Explorer will compare the root-mean-sqaured (RMS) average of all three filters and the raw sensor output in real-time. THe RMS is the average variance from the mean of the sensor output. This allows users to quickly configure and compare the performance of different smoothing filters simultaneously.
 
 ## Linear Acceleration
 
@@ -108,19 +94,11 @@ In most cases, the gyroscope is used to measure the devices orientation, which c
 
 For more information on integrating the gyroscope to obtain a quaternion, rotation matrix or orientation, see [here](http://www.kircherelectronics.com/blog/index.php/11-android/sensors/15-android-gyroscope-basics).
 
-### Orientation Euler Angles Complimentary Filter (ImuLaCfOrientation)
-
-You can obtain an orientation comprised of Euler Angles (azimuth, pitch and roll) two ways in Android. The first method involves integrating the gyroscope measurements. The second is obtained by using the acceleration and magnetic sensors. These two measurements are ideal for a complimentary filter fusion. Paul Lawitzki wrote such an algorithm (you can find his writeup [here](http://www.thousand-thoughts.com/2012/03/android-sensor-fusion-tutorial/). I have modified it slightly and included it in Acceleration Explorer. While it is not what I consider an elegant, or particularly fast algorithm, it is highly intutive and easier to grasp than most approaches. Most importantly, it works well.
-
-### Rotation Matrix Complimentary Filter (ImuLaCfRotationMatrix)
-
-Rotation matrices for the gyroscope and acceleration/magnetic sensor can be obtained in much the same way as the orientation Euler angles... in fact you need them to obtain the orientation. Rotation matrices can be scaled with a scalar matrix just like any other matrix, which allows them to be used in a complementary filter. Instead of using the orientation, the complementary filter is applied to the rotation matrices which is slightly more efficient and significantly more elegant than using the orientations. Rotation matrices suffer from many singularites including gimbal lock, so they are not ideal. However, many people are familiar with the concept of rotation matrices so this approach may be more simple to understand.
-
-### Quaternions Complimentary Filter (ImuLaCfQuaternion)
+### Quaternions Complimentary Filter
 
 Quaternions offer an angle-axis solution to rotations which do not suffer from many of the singularies, including gimbal lock, that you will find with rotation matrices. Quaternions can also be scaled and applied to a complimentary filter. The quaternion complimentary filter is probably the most elegant, robust and accurate of the filters, although it can also be the most difficult to implement.
 
-### Quaternion Kalman Filter (ImuLaKfQuaternion)
+### Quaternion Kalman Filter
 
 Kalman filtering, also known as linear quadratic estimation (LQE), is an algorithm that uses a series of measurements observed over time, containing noise (random variations) and other inaccuracies, and produces estimates of unknown variables that tend to be more precise than those based on a single measurement alone. More formally, the Kalman filter operates recursively on streams of noisy input data to produce a statistically optimal estimate of the underlying system state. Much like complimentary filters, Kalman filters require two sets of estimations, which we have from the gyroscope and acceleration/magnetic senor. The Acceleration Explorer implementation of the Kalman filter relies on quaternions. 
 
