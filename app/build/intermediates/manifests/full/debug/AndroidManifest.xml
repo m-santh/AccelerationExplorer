@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kircherelectronics.accelerationexplorer"
-    android:versionCode="14"
-    android:versionName="3.2.5" >
+    android:versionCode="17"
+    android:versionName="3.2.8" >
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="25" />
+        android:targetSdkVersion="26" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -48,7 +48,7 @@
 
         <meta-data
             android:name="android.support.VERSION"
-            android:value="25.4.0" />
+            android:value="26.0.0" />
 
         <provider
             android:name="android.arch.lifecycle.LifecycleRuntimeTrojanProvider"
