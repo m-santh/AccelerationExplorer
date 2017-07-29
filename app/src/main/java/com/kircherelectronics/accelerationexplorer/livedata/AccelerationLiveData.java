@@ -438,22 +438,6 @@ public class AccelerationLiveData<T> extends LiveData<float[]> {
         }
     }
 
-    public enum FusionType {
-        COMPLIMENTARY(0),
-        KALMAN(1),
-        LPF(2);
-
-        private final int id;
-
-        FusionType(int id) {
-            this.id = id;
-        }
-
-        public int getId() {
-            return id;
-        }
-    }
-
     private class SimpleSensorListener implements SensorEventListener {
 
         @Override
