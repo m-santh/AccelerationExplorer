@@ -3,12 +3,6 @@ AccelerationExplorer
 
 <img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_home.png" width="270">
 
-# Backed by FSensor
-
-![Alt text](http://www.kircherelectronics.com/resources/images/fsensor/FSensor.png "FSensor")
-
-The lastest release of Acceleration Explorer is now backed by [FSensor](https://github.com/KalebKE/FSensor). *If you are interested in implementing the sensor fusions, you want to go there.* FSensor (FusionSensor) is an Android library that (hopefully) removes some/most of the complexity of using Androids orientation sensors (Acceleration, Magnetic and Gyroscope). You can now just link FSensor to your project and get coding. No more having to wade through dense code to pick the parts you need.
-
 # Introduction
 
 Acceleration Explorer is an open source Android application with two different purposes. 
@@ -18,6 +12,12 @@ The first purpose is to help developers write better code by providing examples 
 The second purpose is a functioning application allowing teachers, students and hobbyists (who may not be interested in the code) to visualize the acceleration sensor's outputs and how different filters effect the outputs.
 
 [Download Acceleration Explorer from Google Play](https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en)
+
+# Backed by FSensor
+
+![Alt text](http://www.kircherelectronics.com/resources/images/fsensor/FSensor.png "FSensor")
+
+The lastest release of Acceleration Explorer is now backed by [FSensor](https://github.com/KalebKE/FSensor). *If you are interested in implementing the sensor fusions, you want to go there.* FSensor (FusionSensor) is an Android library that (hopefully) removes some/most of the complexity of using Androids orientation sensors (Acceleration, Magnetic and Gyroscope). You can now just link FSensor to your project and get coding. No more having to wade through dense code to pick the parts you need.
 
 ## Wiki 
 
@@ -53,7 +53,7 @@ The vector plots the acceleration as a vector (a line with a direction and magni
 
 ### The Gauges
 
-![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_gauges.png "Android Acceleration Explorer Screenshot")
+<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_gauges.png" width="270">
 
 The gauges plot the acceleration of the x and y axis in terms of tilt and acceleration relative to 1g, or 9.8 meters/sec^2. One of the key limitations of acceleration sensors is the inability to differentiate tilt from linear acceleration.
 
