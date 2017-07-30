@@ -1,7 +1,7 @@
 AccelerationExplorer
 ====================
 
-![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_home.png "Android Acceleration Explorer Screenshot")
+<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/home.png" width="540">
 
 # Backed by FSensor
 
