@@ -11,7 +11,7 @@ The first purpose is to help developers write better code by providing examples 
 
 The second purpose is a functioning application allowing teachers, students and hobbyists (who may not be interested in the code) to visualize the acceleration sensor's outputs and how different filters effect the outputs.
 
-[Download Acceleration Explorer from Google Play](https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en)
+ <a href="https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en">![Alt text](http://www.kircherelectronics.com/resources/images/google-play-badge.png "FSensor")</a>
 
 # Backed by FSensor
 
