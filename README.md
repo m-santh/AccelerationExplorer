@@ -1,7 +1,7 @@
 AccelerationExplorer
 ====================
 
-<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_home.png" width="540">
+<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_home.png" width="270">
 
 # Backed by FSensor
 
