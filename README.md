@@ -46,7 +46,8 @@ The logger provides a real-time plot of the X, Y and Z axis of the acceleration 
 
 ### The Vector
 
-![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_vector.png "Android Acceleration Explorer Screenshot")
+<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_vector.png" width="270">
+
 
 The vector plots the acceleration as a vector (a line with a direction and magnitude) in the x and y axis. The maximum magnitude (length) of the vector is limited to 1g, or 9.8 meters/sec^2. All of the smoothing filters and linear acceleration filters can be applied to the acceleration sensor data.
 
