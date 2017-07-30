@@ -5,7 +5,7 @@ AccelerationExplorer
 
 # Backed by FSensor
 
-The lastest release of Acceleration explorer is now backed by [FSensor](https://github.com/KalebKE/FSensor/blob/master/README.md). FSensor (FusionSensor) is an Android library that (hopefully) removes some/most of the complexity of using Androids orientation sensors (Acceleration, Magnetic and Gyroscope). You can now just link FSensor to your project and get coding. No more having to wade through dense code to pick the parts you need.
+The lastest release of Acceleration explorer is now backed by [FSensor](https://github.com/KalebKE/FSensor/blob/master/README.md). If you are only interested in the sensor fusions, you want to go there. FSensor (FusionSensor) is an Android library that (hopefully) removes some/most of the complexity of using Androids orientation sensors (Acceleration, Magnetic and Gyroscope). You can now just link FSensor to your project and get coding. No more having to wade through dense code to pick the parts you need.
 
 # Introduction
 
