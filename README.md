@@ -3,6 +3,8 @@ AccelerationExplorer
 
 <img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_home.png" width="270">
 
+ <a href="https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en"><img src="http://www.kircherelectronics.com/resources/images/google-play-badge.png" width="270"></a>
+
 # Introduction
 
 Acceleration Explorer is an open source Android application with two different purposes. 
@@ -10,8 +12,6 @@ Acceleration Explorer is an open source Android application with two different p
 The first purpose is to help developers write better code by providing examples of how to implement the Android acceleration sensor and apply various smoothing and linear acceleration filters. Choosing to use the sensor values provided by Android directly will prove to be a poor choice in most applications and this is not immediately obvious to most developers. Furthermore, finding the acceleration measurements for your project requires a great deal of understanding and knowledge to do correctly. Blindly throwing a couple of filters at the acceleration sensor will likely result in a disapointed developer. Acceleration Explorer seeks to prevent the disapointed developer by providing theory, code examples and an application to test and experiment with.
 
 The second purpose is a functioning application allowing teachers, students and hobbyists (who may not be interested in the code) to visualize the acceleration sensor's outputs and how different filters effect the outputs.
-
- <a href="https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en"><img src="http://www.kircherelectronics.com/resources/images/google-play-badge.png" width="270"></a>
 
 # Backed by FSensor
 
