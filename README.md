@@ -1,7 +1,7 @@
 AccelerationExplorer
 ====================
 
-<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_home.png" width="270">
+<img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144528-169x300.png" width="270">
 
  <a href="https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en"><img src="http://www.kircherelectronics.com/resources/images/google-play-badge.png" width="270"></a>
 
