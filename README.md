@@ -40,7 +40,7 @@ Acceleration Explorer Features:
 
 ### The Logger
 
-<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_logger.png" width="270">
+<img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144535" width="270">
 
 The logger provides a real-time plot of the X, Y and Z axis of the acceleration sensor. You can also opt to log the sensor data to an external .CSV file. All of the smoothing filters and linear acceleration filters can be applied to the acceleration sensor data.
 
