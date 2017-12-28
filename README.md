@@ -46,14 +46,14 @@ The logger provides a real-time plot of the X, Y and Z axis of the acceleration 
 
 ### The Vector
 
-<img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144542" width="270">
+<img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144603" width="270">
 
 
 The vector plots the acceleration as a vector (a line with a direction and magnitude) in the x and y axis. The maximum magnitude (length) of the vector is limited to 1g, or 9.8 meters/sec^2. All of the smoothing filters and linear acceleration filters can be applied to the acceleration sensor data.
 
 ### The Gauges
 
-<img src="http://www.kircherelectronics.com/resources/images/accelerationExplorer/v328/acceleration_explorer_gauges.png" width="270">
+<img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144542" width="270">
 
 The gauges plot the acceleration of the x and y axis in terms of tilt and acceleration relative to 1g, or 9.8 meters/sec^2. One of the key limitations of acceleration sensors is the inability to differentiate tilt from linear acceleration.
 
