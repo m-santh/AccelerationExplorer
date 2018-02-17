@@ -3,7 +3,7 @@ AccelerationExplorer
 
 <img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144528.png" width="270">
 
- <a href="https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en"><img src="http://www.kircherelectronics.com/resources/images/google-play-badge.png" width="270"></a>
+ <a href="https://play.google.com/store/apps/details?id=com.kircherelectronics.accelerationexplorer&hl=en"><img src="http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/en_badge_web_generic.png" width="270"></a>
 
 # Introduction
 
@@ -15,7 +15,7 @@ The second purpose is a functioning application allowing teachers, students and 
 
 # Backed by FSensor
 
- <a href="https://github.com/KalebKE/FSensor">![Alt text](http://www.kircherelectronics.com/resources/images/fsensor/FSensor.png "FSensor")</a>
+ <a href="https://github.com/KalebKE/FSensor">![Alt text](http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/FSensor.png "FSensor")</a>
 
 The latest release of Acceleration Explorer is now backed by [FSensor](https://github.com/KalebKE/FSensor). *If you are interested in implementing the sensor fusions, you want to go there.* FSensor (FusionSensor) is an Android library that (hopefully) removes some/most of the complexity of using Androids orientation sensors (Acceleration, Magnetic and Gyroscope). You can now just link FSensor to your project and get coding. No more having to wade through dense code to pick the parts you need.
 
