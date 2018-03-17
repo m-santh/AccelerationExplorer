@@ -1,14 +1,11 @@
 package com.kircherelectronics.accelerationexplorer.fragment;
 
-import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +37,7 @@ import java.util.Locale;
  * Created by kaleb on 7/7/17.
  */
 
-public class StatusBarFragment extends LifecycleFragment {
+public class StatusBarFragment extends Fragment {
 
     private static final String tag = StatusBarFragment.class.getSimpleName();
 

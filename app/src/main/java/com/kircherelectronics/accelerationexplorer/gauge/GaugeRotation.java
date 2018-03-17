@@ -270,7 +270,7 @@ public final class GaugeRotation extends View {
 
         float angle = (float) -(Math.atan2(-rotation[0], -rotation[2]) * 180 / Math.PI);
 
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.rotate(angle, faceBitmap.getWidth() / 2f,
                 faceBitmap.getHeight() / 2f);
 
@@ -329,7 +329,7 @@ public final class GaugeRotation extends View {
         drawFace(canvas);
 
         float scale = (float) getWidth();
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.scale(scale, scale);
 
         canvas.restore();

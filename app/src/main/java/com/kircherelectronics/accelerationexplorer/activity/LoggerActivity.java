@@ -2,7 +2,6 @@ package com.kircherelectronics.accelerationexplorer.activity;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.PackageManager;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.Window;
 
 import com.kircherelectronics.accelerationexplorer.R;
-
 import com.kircherelectronics.accelerationexplorer.datalogger.DataLoggerManager;
 import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
 import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
@@ -51,7 +49,7 @@ import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewMod
  * @author Kaleb
  * @version %I%, %G%
  */
-public class LoggerActivity extends LifecycleActivity {
+public class LoggerActivity extends AppCompatActivity {
     // Plot keys for the acceleration plot
     private final static String tag = LoggerActivity.class.getSimpleName();
     private final static int WRITE_EXTERNAL_STORAGE_REQUEST = 1000;
