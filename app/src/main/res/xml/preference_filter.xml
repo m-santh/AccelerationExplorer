@@ -73,7 +73,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:dialogTitle="Enable Android Linear Accel"
-            android:key="android_linear_accel_filter_preference"
+            android:key="android_linear_accel_filter_enabled_preference"
             android:summaryOff="Android Linear Accel is Off"
             android:summaryOn="Android Linear Accel is On"
             android:title="Enable Linear Accel Android" />

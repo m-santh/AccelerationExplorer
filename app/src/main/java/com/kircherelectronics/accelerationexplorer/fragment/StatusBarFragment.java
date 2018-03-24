@@ -1,14 +1,11 @@
 package com.kircherelectronics.accelerationexplorer.fragment;
 
-import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +37,7 @@ import java.util.Locale;
  * Created by kaleb on 7/7/17.
  */
 
-public class StatusBarFragment extends LifecycleFragment {
+public class StatusBarFragment extends Fragment {
 
     private static final String tag = StatusBarFragment.class.getSimpleName();
 
@@ -86,10 +83,10 @@ public class StatusBarFragment extends LifecycleFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_status_bar, container, false);
 
-        textViewXAxis = (TextView) view.findViewById(R.id.value_x_axis);
-        textViewYAxis = (TextView) view.findViewById(R.id.value_y_axis);
-        textViewZAxis = (TextView) view.findViewById(R.id.value_z_axis);
-        textViewHzFrequency = (TextView) view.findViewById(R.id.value_hz_frequency);
+        textViewXAxis = view.findViewById(R.id.value_x_axis);
+        textViewYAxis = view.findViewById(R.id.value_y_axis);
+        textViewZAxis = view.findViewById(R.id.value_z_axis);
+        textViewHzFrequency = view.findViewById(R.id.value_hz_frequency);
 
         return view;
     }
@@ -108,10 +105,12 @@ public class StatusBarFragment extends LifecycleFragment {
 
     private void updateAccelerationText()
     {
-        // Update the acceleration data
-        textViewXAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[0]));
-        textViewYAxis.setText(String.format(Locale.getDefault(),"%.2f", acceleration[1]));
-        textViewZAxis.setText(String.format(Locale.getDefault(),"%.2f", acceleration[2]));
-        textViewHzFrequency.setText(String.format(Locale.getDefault(),"%.0f", acceleration[3]));
+        if(acceleration.length == 4) {
+            // Update the acceleration data
+            textViewXAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[0]));
+            textViewYAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[1]));
+            textViewZAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[2]));
+            textViewHzFrequency.setText(String.format(Locale.getDefault(), "%.0f", acceleration[3]));
+        }
     }
 }

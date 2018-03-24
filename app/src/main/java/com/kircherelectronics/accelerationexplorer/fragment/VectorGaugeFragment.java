@@ -1,11 +1,12 @@
 package com.kircherelectronics.accelerationexplorer.fragment;
 
-import android.arch.lifecycle.LifecycleFragment;
+
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewMod
  * Created by kaleb on 7/9/17.
  */
 
-public class VectorGaugeFragment extends LifecycleFragment {
+public class VectorGaugeFragment extends Fragment {
 
     private GaugeVector gaugeVector;
     private Handler handler;

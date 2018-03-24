@@ -1,17 +1,17 @@
 package com.kircherelectronics.accelerationexplorer.fragment;
 
-import android.arch.lifecycle.LifecycleFragment;
+
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
 import com.kircherelectronics.accelerationexplorer.gauge.GaugeRotation;
 import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
 
@@ -36,7 +36,7 @@ import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewMod
  * Created by kaleb on 7/8/17.
  */
 
-public class RotationGaugeFragment extends LifecycleFragment {
+public class RotationGaugeFragment extends Fragment {
 
     private GaugeRotation gaugeRotation;
     private Handler handler;
