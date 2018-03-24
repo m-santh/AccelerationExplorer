@@ -15,8 +15,8 @@ android {
         applicationId "com.kircherelectronics.accelerationexplorer"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode = 17
-        versionName = "3.2.8"
+        versionCode = 18
+        versionName = "3.2.9"
     }
     buildTypes {
         release {
