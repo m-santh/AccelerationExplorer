@@ -1,7 +1,7 @@
 AccelerationExplorer
 ====================
 
-![Alt text](http://www.kircherelectronics.com/resources/images/accelerationExplorer/acceleration_explorer_home.png "Android Acceleration Explorer Screenshot")
+![Alt text](http://kircherelectronics.com.23.38-89-161.groveurl.com/wp-content/uploads/2017/12/Screenshot_20170709-144542.png "Android Acceleration Explorer Screenshot")
 
 # Introduction
 
