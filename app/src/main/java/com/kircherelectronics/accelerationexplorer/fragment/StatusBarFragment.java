@@ -83,10 +83,10 @@ public class StatusBarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_status_bar, container, false);
 
-        textViewXAxis = (TextView) view.findViewById(R.id.value_x_axis);
-        textViewYAxis = (TextView) view.findViewById(R.id.value_y_axis);
-        textViewZAxis = (TextView) view.findViewById(R.id.value_z_axis);
-        textViewHzFrequency = (TextView) view.findViewById(R.id.value_hz_frequency);
+        textViewXAxis = view.findViewById(R.id.value_x_axis);
+        textViewYAxis = view.findViewById(R.id.value_y_axis);
+        textViewZAxis = view.findViewById(R.id.value_z_axis);
+        textViewHzFrequency = view.findViewById(R.id.value_hz_frequency);
 
         return view;
     }
@@ -105,10 +105,12 @@ public class StatusBarFragment extends Fragment {
 
     private void updateAccelerationText()
     {
-        // Update the acceleration data
-        textViewXAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[0]));
-        textViewYAxis.setText(String.format(Locale.getDefault(),"%.2f", acceleration[1]));
-        textViewZAxis.setText(String.format(Locale.getDefault(),"%.2f", acceleration[2]));
-        textViewHzFrequency.setText(String.format(Locale.getDefault(),"%.0f", acceleration[3]));
+        if(acceleration.length == 4) {
+            // Update the acceleration data
+            textViewXAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[0]));
+            textViewYAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[1]));
+            textViewZAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[2]));
+            textViewHzFrequency.setText(String.format(Locale.getDefault(), "%.0f", acceleration[3]));
+        }
     }
 }
