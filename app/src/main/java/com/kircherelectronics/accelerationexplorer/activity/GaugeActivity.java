@@ -3,7 +3,6 @@ package com.kircherelectronics.accelerationexplorer.activity;
 import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,15 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigActivity;
-import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
-import com.kircherelectronics.accelerationexplorer.gauge.GaugeRotation;
-import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
-import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
-import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
+import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
 
 /*
  * AccelerationExplorer
@@ -45,8 +39,6 @@ import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewMod
  * @author Kaleb
  */
 public class GaugeActivity extends AppCompatActivity {
-
-    private AccelerationLiveData liveData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,17 +79,6 @@ public class GaugeActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateConfiguration();
-    }
-
     private void showHelpDialog() {
         Dialog helpDialog = new Dialog(this);
 
@@ -114,28 +95,6 @@ public class GaugeActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        AccelerationViewModel model = ViewModelProviders.of(this).get(AccelerationViewModel.class);
-        liveData = model.getAccelerationListener();
-    }
-
-    private void updateConfiguration() {
-        liveData.setSensorFrequency(PrefUtils.getSensorFrequencyPrefs(this));
-        liveData.setAxisInverted(PrefUtils.getInvertAxisPrefs(this));
-
-        liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
-        liveData.enableFSensorComplimentaryLinearAcceleration(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(this));
-        liveData.enableFSensorKalmanLinearAcceleration(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this));
-        liveData.enableFSensorLpfLinearAcceleration(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this));
-
-        liveData.setFSensorComplimentaryLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationTimeConstant(this));
-        liveData.setFSensorLpfLinearAccelerationTimeConstant(PrefUtils.getPrefFSensorLpfLinearAccelerationTimeConstant(this));
-
-        liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
-        liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
-        liveData.enableLpfSmoothing(PrefUtils.getPrefLpfSmoothingEnabled(this));
-
-        liveData.setMeanFilterSmoothingTimeConstant(PrefUtils.getPrefMeanFilterSmoothingTimeConstant(this));
-        liveData.setMedianFilterSmoothingTimeConstant(PrefUtils.getPrefMedianFilterSmoothingTimeConstant(this));
-        liveData.setLpfSmoothingTimeConstant(PrefUtils.getPrefLpfSmoothingTimeConstant(this));
+        SensorViewModel model = ViewModelProviders.of(this).get(SensorViewModel.class);
     }
 }

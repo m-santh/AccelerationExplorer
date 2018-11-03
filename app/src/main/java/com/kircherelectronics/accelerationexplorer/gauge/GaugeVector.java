@@ -272,7 +272,7 @@ public final class GaugeVector extends View {
         drawBackground(canvas);
 
         float scale = (float) getWidth();
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.save();
         canvas.scale(scale, scale);
 
         drawAxisLength(canvas);

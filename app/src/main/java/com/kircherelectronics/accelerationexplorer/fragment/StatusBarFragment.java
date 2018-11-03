@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
+import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
 
 import java.util.Locale;
 
@@ -56,9 +56,9 @@ public class StatusBarFragment extends Fragment {
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        AccelerationViewModel model = ViewModelProviders.of(getActivity()).get(AccelerationViewModel.class);
+        SensorViewModel model = ViewModelProviders.of(getActivity()).get(SensorViewModel.class);
 
-        model.getAccelerationListener().observe(this, new Observer<float[]>() {
+        model.getAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
             @Override
             public void onChanged(@Nullable float[] floats) {
                 acceleration = floats;

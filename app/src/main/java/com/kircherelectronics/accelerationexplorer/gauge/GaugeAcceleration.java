@@ -330,7 +330,7 @@ public final class GaugeAcceleration extends View
 	 */
 	private void drawPoint(Canvas canvas)
 	{
-		canvas.save(Canvas.MATRIX_SAVE_FLAG);
+		canvas.save();
 		pointPaint.setColor(this.color);
 		canvas.drawCircle(this.x, this.y, 0.025f, pointPaint);
 		canvas.restore();
@@ -360,7 +360,7 @@ public final class GaugeAcceleration extends View
 		drawBackground(canvas);
 
 		float scale = (float) getWidth();
-		canvas.save(Canvas.MATRIX_SAVE_FLAG);
+		canvas.save();
 		canvas.scale(scale, scale);
 
 		drawPoint(canvas);

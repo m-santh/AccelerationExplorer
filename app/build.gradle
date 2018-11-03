@@ -1,14 +1,22 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        ke_developer {
+            keyAlias ANDROID_KEY_ALIAS
+            keyPassword ANDROID_KEY_PASSWORD
+            storeFile file(ANDROID_STORE_FILE)
+            storePassword ANDROID_STORE_PASSWORD
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.kircherelectronics.accelerationexplorer"
-        minSdkVersion 14
-        targetSdkVersion 26
-        versionCode = 18
-        versionName = "3.2.9"
+        minSdkVersion 18
+        targetSdkVersion 28
+        versionCode = 17
+        versionName = "3.2.8"
     }
     buildTypes {
         release {
@@ -21,10 +29,12 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:28.0.0'
     compile 'com.android.support:appcompat-v7:28.0.0'
-    compile 'com.github.KalebKE:FSensor:v1.1.4'
+    //compile 'com.github.KalebKE:FSensor:v1.2'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     compile 'org.apache.commons:commons-csv:1.4'
     compile 'android.arch.lifecycle:runtime:1.1.1'
     compile 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    compile project(':fsensor')
 }
