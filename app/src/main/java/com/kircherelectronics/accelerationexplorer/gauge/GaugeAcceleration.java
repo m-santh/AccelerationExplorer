@@ -15,7 +15,7 @@ import android.view.View;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,51 +44,6 @@ import android.view.View;
  */
 public final class GaugeAcceleration extends View
 {
-
-	/*
-	 * Developer Note: In the interest of keeping everything as fast as
-	 * possible, only the measurements are redrawn, the gauge background and
-	 * display information are drawn once per device orientation and then cached
-	 * so they can be reused. All allocation and reclaiming of memory should
-	 * occur before and after the handler is posted to the thread, but never
-	 * while the thread is running. Allocation and reclamation of memory while
-	 * the handler is posted to the thread will cause the GC to run, resulting
-	 * in long delays (up to 600ms) while the GC cleans up memory. The frame
-	 * rate to drop dramatically if the GC is running often, so try to keep it
-	 * happy and out of the way.
-	 * 
-	 * Avoid iterators, Set or Map collections (use SparseArray), + to
-	 * concatenate Strings (use StringBuffers) and above all else boxed
-	 * primitives (Integer, Double, Float, etc).
-	 */
-
-	/*
-	 * Developer Note: There are some things to keep in mind when it comes to
-	 * Android and hardware acceleration. What we see in Android 4.0 is full
-	 * hardware acceleration. All UI elements in windows, and third-party apps
-	 * will have access to the GPU for rendering. Android 3.0 had the same
-	 * system, but now developers will be able to specifically target Android
-	 * 4.0 with hardware acceleration. Google is encouraging developers to
-	 * update apps to be fully-compatible with this system by adding the
-	 * hardware acceleration tag in an app�s manifest. Android has always used
-	 * some hardware accelerated drawing.
-	 * 
-	 * Since before 1.0 all window compositing to the display has been done with
-	 * hardware. "Full" hardware accelerated drawing within a window was added
-	 * in Android 3.0. The implementation in Android 4.0 is not any more full
-	 * than in 3.0. Starting with 3.0, if you set the flag in your app saying
-	 * that hardware accelerated drawing is allowed, then all drawing to the
-	 * applications windows will be done with the GPU. The main change in this
-	 * regard in Android 4.0 is that now apps that are explicitly targeting 4.0
-	 * or higher will have acceleration enabled by default rather than having to
-	 * put android:handwareAccelerated="true" in their manifest. (And the reason
-	 * this isn't just turned on for all existing applications is that some
-	 * types of drawing operations can't be supported well in hardware and it
-	 * also impacts the behavior when an application asks to have a part of its
-	 * UI updated. Forcing hardware accelerated drawing upon existing apps will
-	 * break a significant number of them, from subtly to significantly.)
-	 */
-
 	private static final String tag = GaugeAcceleration.class.getSimpleName();
 
 	// holds the cached static part

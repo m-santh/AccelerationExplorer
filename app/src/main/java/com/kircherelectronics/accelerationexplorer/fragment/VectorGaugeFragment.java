@@ -18,7 +18,7 @@ import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class VectorGaugeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vector_gauge, container, false);
 
-        gaugeVector = (GaugeVector) view.findViewById(R.id.gauge_vector);
+        gaugeVector = view.findViewById(R.id.gauge_vector);
 
         return view;
     }
