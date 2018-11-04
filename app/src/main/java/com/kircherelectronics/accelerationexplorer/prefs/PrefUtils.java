@@ -26,11 +26,6 @@ import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigA
 
 public class PrefUtils
 {
-	public static boolean getInvertAxisPrefs(Context context) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		return prefs.getBoolean(FilterConfigActivity.AXIS_INVERSION_ENABLED_KEY, false);
-	}
-
 	public static boolean getPrefAndroidLinearAccelerationEnabled(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(FilterConfigActivity.ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);

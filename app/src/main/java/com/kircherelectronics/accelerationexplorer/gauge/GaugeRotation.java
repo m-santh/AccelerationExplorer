@@ -115,9 +115,7 @@ public final class GaugeRotation extends View {
      * @param rotation
      */
     public void updateRotation(float[] rotation) {
-        Log.d("kbk", "R: " + Arrays.toString(rotation));
         System.arraycopy(rotation, 0, this.rotation, 0, this.rotation.length);
-
         this.invalidate();
     }
 
@@ -252,7 +250,7 @@ public final class GaugeRotation extends View {
             faceCanvas.drawArc(faceBackgroundRect, 0, 360, true, skyPaint);
             skyCanvas.drawRect(skyBackgroundRect, skyPaint);
 
-            float angle = (float) Math.toDegrees(rotation[1]);
+            float angle = (float) -Math.toDegrees(rotation[1]);
 
             canvas.save();
             canvas.rotate(angle, faceBitmap.getWidth() / 2f,

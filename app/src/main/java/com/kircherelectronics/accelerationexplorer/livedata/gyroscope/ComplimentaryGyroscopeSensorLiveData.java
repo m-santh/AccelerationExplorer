@@ -2,8 +2,11 @@ package com.kircherelectronics.accelerationexplorer.livedata.gyroscope;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.util.Log;
 
 import com.kircherelectronics.fsensor.sensor.gyroscope.ComplimentaryGyroscopeSensor;
+
+import java.util.Arrays;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;

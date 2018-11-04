@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.gauge.GaugeRotation;
 import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
 import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
+
+import java.util.Arrays;
 
 /*
  * AccelerationExplorer
@@ -49,15 +52,6 @@ public class RotationGaugeFragment extends Fragment {
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        SensorViewModel model = ViewModelProviders.of(getActivity()).get(SensorViewModel.class);
-
-        model.getAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
-            @Override
-            public void onChanged(@Nullable float[] floats) {
-                rotation = floats;
-            }
-        });
 
         handler = new Handler();
         runnable = new Runnable()
