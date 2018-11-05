@@ -1,2 +1,2 @@
-include ':app', ':fsensor'
-project(':fsensor').projectDir=new File('/Users/kaleb/StudioProjects/FSensor/fsensor')
+include ':app'
+
