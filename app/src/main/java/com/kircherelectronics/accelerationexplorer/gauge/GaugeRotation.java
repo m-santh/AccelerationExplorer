@@ -9,14 +9,13 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,30 +114,6 @@ public final class GaugeRotation extends View {
      */
     public void updateRotation(float[] rotation) {
         System.arraycopy(rotation, 0, this.rotation, 0, this.rotation.length);
-
-        this.rotation[0] = -this.rotation[0] / SensorManager.GRAVITY_EARTH;
-        this.rotation[1] = -this.rotation[1] / SensorManager.GRAVITY_EARTH;
-        this.rotation[2] = -this.rotation[2] / SensorManager.GRAVITY_EARTH;
-
-        if (this.rotation[0] > 1.0f) {
-            this.rotation[0] = 1.0f;
-        }
-        if (this.rotation[0] < -1.0f) {
-            this.rotation[0] = -1.0f;
-        }
-        if (this.rotation[1] > 1.0f) {
-            this.rotation[1] = 1.0f;
-        }
-        if (this.rotation[1] < -1.0f) {
-            this.rotation[1] = -1.0f;
-        }
-        if (this.rotation[2] > 1.0f) {
-            this.rotation[2] = 1.0f;
-        }
-        if (this.rotation[2] < -1.0f) {
-            this.rotation[2] = -1.0f;
-        }
-
         this.invalidate();
     }
 
@@ -228,59 +203,65 @@ public final class GaugeRotation extends View {
      * @param canvas
      */
     private void drawFace(Canvas canvas) {
-        // free the old bitmap
-        if (faceBitmap != null) {
-            faceBitmap.recycle();
-        }
-
-        if(skyBitmap != null) {
-            skyBitmap.recycle();
-        }
-
-        if(mutableBitmap != null) {
-            mutableBitmap.recycle();
-        }
-
-        skyPaint.setFilterBitmap(false);
-
-        faceBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
-                Bitmap.Config.ARGB_8888);
-        skyBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
-                Bitmap.Config.ARGB_8888);
-        mutableBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas faceCanvas = new Canvas(faceBitmap);
-        Canvas skyCanvas = new Canvas(skyBitmap);
-        Canvas mutableCanvas = new Canvas(mutableBitmap);
-        float scale = (float) getWidth();
-        faceCanvas.scale(scale, scale);
-        skyCanvas.scale(scale, scale);
-
-        faceBackgroundRect.set(rimRect.left, rimRect.top, rimRect.right,
-                rimRect.bottom);
 
         float halfHeight = ((rimRect.top - rimRect.bottom)/2);
 
-        skyBackgroundRect.set(rimRect.left, rimRect.top - halfHeight + (rotation[1]*halfHeight) , rimRect.right,
-                rimRect.bottom);
+        float top = rimRect.top - halfHeight + (rotation[0]*halfHeight);
 
-        faceCanvas.drawArc(faceBackgroundRect, 0, 360, true, skyPaint);
-        skyCanvas.drawRect(skyBackgroundRect, skyPaint);
+        if(rimRect.left <= rimRect.right && top <= rimRect.bottom) {
+            // free the old bitmap
+            if (faceBitmap != null) {
+                faceBitmap.recycle();
+            }
 
-        float angle = (float) -(Math.atan2(-rotation[0], -rotation[2]) * 180 / Math.PI);
+            if (skyBitmap != null) {
+                skyBitmap.recycle();
+            }
 
-        canvas.save(Canvas.ALL_SAVE_FLAG);
-        canvas.rotate(angle, faceBitmap.getWidth() / 2f,
-                faceBitmap.getHeight() / 2f);
+            if (mutableBitmap != null) {
+                mutableBitmap.recycle();
+            }
 
-        mutableCanvas.drawBitmap(faceBitmap, 0, 0, skyPaint);
-        skyPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        mutableCanvas.drawBitmap(skyBitmap, 0, 0, skyPaint);
-        skyPaint.setXfermode(null);
+            skyPaint.setFilterBitmap(false);
 
-        canvas.drawBitmap(mutableBitmap, 0, 0, backgroundPaint);
-        canvas.restore();
+            faceBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+                    Bitmap.Config.ARGB_8888);
+            skyBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+                    Bitmap.Config.ARGB_8888);
+            mutableBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
+                    Bitmap.Config.ARGB_8888);
+
+            Canvas faceCanvas = new Canvas(faceBitmap);
+            Canvas skyCanvas = new Canvas(skyBitmap);
+            Canvas mutableCanvas = new Canvas(mutableBitmap);
+            float scale = (float) getWidth();
+            faceCanvas.scale(scale, scale);
+            skyCanvas.scale(scale, scale);
+
+            faceBackgroundRect.set(rimRect.left, rimRect.top, rimRect.right,
+                    rimRect.bottom);
+
+
+            skyBackgroundRect.set(rimRect.left, top, rimRect.right,
+                    rimRect.bottom);
+
+            faceCanvas.drawArc(faceBackgroundRect, 0, 360, true, skyPaint);
+            skyCanvas.drawRect(skyBackgroundRect, skyPaint);
+
+            float angle = (float) -Math.toDegrees(rotation[1]);
+
+            canvas.save();
+            canvas.rotate(angle, faceBitmap.getWidth() / 2f,
+                    faceBitmap.getHeight() / 2f);
+
+            mutableCanvas.drawBitmap(faceBitmap, 0, 0, skyPaint);
+            skyPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+            mutableCanvas.drawBitmap(skyBitmap, 0, 0, skyPaint);
+            skyPaint.setXfermode(null);
+
+            canvas.drawBitmap(mutableBitmap, 0, 0, backgroundPaint);
+            canvas.restore();
+        }
     }
 
     /**
@@ -329,7 +310,7 @@ public final class GaugeRotation extends View {
         drawFace(canvas);
 
         float scale = (float) getWidth();
-        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.save();
         canvas.scale(scale, scale);
 
         canvas.restore();

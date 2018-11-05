@@ -13,7 +13,7 @@ import com.kircherelectronics.accelerationexplorer.R;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,54 +102,59 @@ public class FilterConfigActivity extends PreferenceActivity implements
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
                                           String key) {
-        if (key.equals(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY)) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                fSensorKalmanLinearAccel.setChecked(false);
-                fSensorComplimentaryLinearAccel.setChecked(false);
-                androidLinearAccel.setChecked(false);
+        switch (key) {
+            case FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY:
+                if (sharedPreferences.getBoolean(key, false)) {
+                    fSensorKalmanLinearAccel.setChecked(false);
+                    fSensorComplimentaryLinearAccel.setChecked(false);
+                    androidLinearAccel.setChecked(false);
 
-                Editor edit = sharedPreferences.edit();
-                edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.apply();
-            }
-        } else if (key.equals(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY)) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                fSensorKalmanLinearAccel.setChecked(false);
-                fSensorLpfLinearAccel.setChecked(false);
-                androidLinearAccel.setChecked(false);
+                    Editor edit = sharedPreferences.edit();
+                    edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.apply();
+                }
+                break;
+            case FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY:
+                if (sharedPreferences.getBoolean(key, false)) {
+                    fSensorKalmanLinearAccel.setChecked(false);
+                    fSensorLpfLinearAccel.setChecked(false);
+                    androidLinearAccel.setChecked(false);
 
-                Editor edit = sharedPreferences.edit();
-                edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.apply();
-            }
-        } else if (key.equals(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY)) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                fSensorComplimentaryLinearAccel.setChecked(false);
-                fSensorLpfLinearAccel.setChecked(false);
-                androidLinearAccel.setChecked(false);
+                    Editor edit = sharedPreferences.edit();
+                    edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.apply();
+                }
+                break;
+            case FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY:
+                if (sharedPreferences.getBoolean(key, false)) {
+                    fSensorComplimentaryLinearAccel.setChecked(false);
+                    fSensorLpfLinearAccel.setChecked(false);
+                    androidLinearAccel.setChecked(false);
 
-                Editor edit = sharedPreferences.edit();
-                edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.apply();
-            }
-        } else if (key.equals(ANDROID_LINEAR_ACCEL_ENABLED_KEY)) {
-            if (sharedPreferences.getBoolean(key, false)) {
-                fSensorComplimentaryLinearAccel.setChecked(false);
-                fSensorLpfLinearAccel.setChecked(false);
-                fSensorKalmanLinearAccel.setChecked(false);
+                    Editor edit = sharedPreferences.edit();
+                    edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.apply();
+                }
+                break;
+            case ANDROID_LINEAR_ACCEL_ENABLED_KEY:
+                if (sharedPreferences.getBoolean(key, false)) {
+                    fSensorComplimentaryLinearAccel.setChecked(false);
+                    fSensorLpfLinearAccel.setChecked(false);
+                    fSensorKalmanLinearAccel.setChecked(false);
 
-                Editor edit = sharedPreferences.edit();
-                edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
-                edit.apply();
-            }
+                    Editor edit = sharedPreferences.edit();
+                    edit.putBoolean(FSENSOR_COMPLIMENTARY_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(FSENSOR_LPF_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.putBoolean(FSENSOR_KALMAN_LINEAR_ACCEL_ENABLED_KEY, false);
+                    edit.apply();
+                }
+                break;
         }
     }
 }

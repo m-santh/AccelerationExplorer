@@ -18,14 +18,13 @@ import android.view.Window;
 
 import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.datalogger.DataLoggerManager;
-import com.kircherelectronics.accelerationexplorer.livedata.AccelerationLiveData;
 import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
 import com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton;
-import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
+import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +53,6 @@ public class LoggerActivity extends AppCompatActivity {
     private final static String tag = LoggerActivity.class.getSimpleName();
     private final static int WRITE_EXTERNAL_STORAGE_REQUEST = 1000;
     private DataLoggerManager dataLogger;
-    private AccelerationLiveData liveData;
     private boolean logData = false;
 
     @Override
@@ -101,7 +99,6 @@ public class LoggerActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         requestPermissions();
-        updateConfiguration();
     }
 
     @Override
@@ -164,39 +161,7 @@ public class LoggerActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        AccelerationViewModel model = ViewModelProviders.of(this).get(AccelerationViewModel.class);
-        liveData = model.getAccelerationListener();
-
-        liveData.observe(this, new Observer<float[]>() {
-            @Override
-            public void onChanged(@Nullable float[] floats) {
-                dataLogger.setAcceleration(floats);
-            }
-        });
-    }
-
-    private void updateConfiguration() {
-        liveData.setSensorFrequency(PrefUtils.getSensorFrequencyPrefs(this));
-        liveData.setAxisInverted(PrefUtils.getInvertAxisPrefs(this));
-
-        liveData.enableAndroidLinearAcceleration(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this));
-        liveData.enableFSensorComplimentaryLinearAcceleration(PrefUtils
-                .getPrefFSensorComplimentaryLinearAccelerationEnabled(this));
-        liveData.enableFSensorKalmanLinearAcceleration(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this));
-        liveData.enableFSensorLpfLinearAcceleration(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this));
-
-        liveData.setFSensorComplimentaryLinearAccelerationTimeConstant(PrefUtils
-                .getPrefFSensorComplimentaryLinearAccelerationTimeConstant(this));
-        liveData.setFSensorLpfLinearAccelerationTimeConstant(PrefUtils
-                .getPrefFSensorLpfLinearAccelerationTimeConstant(this));
-
-        liveData.enableMeanFilterSmoothing(PrefUtils.getPrefMeanFilterSmoothingEnabled(this));
-        liveData.enableMedianFilterSmoothing(PrefUtils.getPrefMedianFilterSmoothingEnabled(this));
-        liveData.enableLpfSmoothing(PrefUtils.getPrefLpfSmoothingEnabled(this));
-
-        liveData.setMeanFilterSmoothingTimeConstant(PrefUtils.getPrefMeanFilterSmoothingTimeConstant(this));
-        liveData.setMedianFilterSmoothingTimeConstant(PrefUtils.getPrefMedianFilterSmoothingTimeConstant(this));
-        liveData.setLpfSmoothingTimeConstant(PrefUtils.getPrefLpfSmoothingTimeConstant(this));
+        SensorViewModel model = ViewModelProviders.of(this).get(SensorViewModel.class);
     }
 
     private void requestPermissions() {

@@ -12,13 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kircherelectronics.accelerationexplorer.R;
-import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
+import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
+import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
 
 import java.util.Locale;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,15 +57,6 @@ public class StatusBarFragment extends Fragment {
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        AccelerationViewModel model = ViewModelProviders.of(getActivity()).get(AccelerationViewModel.class);
-
-        model.getAccelerationListener().observe(this, new Observer<float[]>() {
-            @Override
-            public void onChanged(@Nullable float[] floats) {
-                acceleration = floats;
-            }
-        });
-
         handler = new Handler();
         runnable = new Runnable()
         {
@@ -100,6 +92,7 @@ public class StatusBarFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initViewModel();
         handler.post(runnable);
     }
 
@@ -111,6 +104,53 @@ public class StatusBarFragment extends Fragment {
             textViewYAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[1]));
             textViewZAxis.setText(String.format(Locale.getDefault(), "%.2f", acceleration[2]));
             textViewHzFrequency.setText(String.format(Locale.getDefault(), "%.0f", acceleration[3]));
+        }
+    }
+
+    private void initViewModel() {
+        SensorViewModel model = ViewModelProviders.of(getActivity()).get(SensorViewModel.class);
+
+        model.getLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getLowPassLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getComplimentaryLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getKalmanLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getAccelerationSensorLiveData().removeObservers(this);
+
+        if(PrefUtils.getPrefAndroidLinearAccelerationEnabled(getContext())) {
+            model.getLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(getContext())){
+            model.getLowPassLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(getContext())) {
+            model.getComplimentaryLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(getContext())) {
+            model.getKalmanLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else {
+            model.getAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
         }
     }
 }

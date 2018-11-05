@@ -2,7 +2,7 @@ package com.kircherelectronics.accelerationexplorer.prefs;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,6 @@ import com.kircherelectronics.accelerationexplorer.activity.config.FilterConfigA
 
 public class PrefUtils
 {
-	public static boolean getInvertAxisPrefs(Context context) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		return prefs.getBoolean(FilterConfigActivity.AXIS_INVERSION_ENABLED_KEY, false);
-	}
-
 	public static boolean getPrefAndroidLinearAccelerationEnabled(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(FilterConfigActivity.ANDROID_LINEAR_ACCEL_ENABLED_KEY, false);

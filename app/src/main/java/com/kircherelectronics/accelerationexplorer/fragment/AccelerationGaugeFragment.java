@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,11 +14,12 @@ import android.view.ViewGroup;
 
 import com.kircherelectronics.accelerationexplorer.R;
 import com.kircherelectronics.accelerationexplorer.gauge.GaugeAcceleration;
-import com.kircherelectronics.accelerationexplorer.viewmodel.AccelerationViewModel;
+import com.kircherelectronics.accelerationexplorer.prefs.PrefUtils;
+import com.kircherelectronics.accelerationexplorer.viewmodel.SensorViewModel;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,15 +50,6 @@ public class AccelerationGaugeFragment extends Fragment {
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        AccelerationViewModel model = ViewModelProviders.of(getActivity()).get(AccelerationViewModel.class);
-
-        model.getAccelerationListener().observe(this, new Observer<float[]>() {
-            @Override
-            public void onChanged(@Nullable float[] floats) {
-                acceleration = floats;
-            }
-        });
-
         handler = new Handler();
         runnable = new Runnable()
         {
@@ -72,10 +65,10 @@ public class AccelerationGaugeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_acceleration_gauge, container, false);
 
-        gaugeAcceleration = (GaugeAcceleration) view.findViewById(R.id.gauge_acceleration);
+        gaugeAcceleration = view.findViewById(R.id.gauge_acceleration);
 
         return view;
     }
@@ -89,10 +82,60 @@ public class AccelerationGaugeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        initViewModel();
+
         handler.post(runnable);
     }
 
     private void updateAccelerationGauge() {
         gaugeAcceleration.updatePoint(acceleration[0], acceleration[1]);
+    }
+
+    private void initViewModel() {
+        SensorViewModel model = ViewModelProviders.of(getActivity()).get(SensorViewModel.class);
+
+        model.getLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getLowPassLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getComplimentaryLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getKalmanLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getAccelerationSensorLiveData().removeObservers(this);
+
+        if(PrefUtils.getPrefAndroidLinearAccelerationEnabled(getContext())) {
+            model.getLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(getContext())){
+            model.getLowPassLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(getContext())) {
+            model.getComplimentaryLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(getContext())) {
+            model.getKalmanLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        } else {
+            model.getAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                }
+            });
+        }
     }
 }

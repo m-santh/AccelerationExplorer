@@ -15,7 +15,7 @@ import android.view.View;
 
 /*
  * AccelerationExplorer
- * Copyright 2017 Kircher Electronics, LLC
+ * Copyright 2018 Kircher Electronics, LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -272,7 +272,7 @@ public final class GaugeVector extends View {
         drawBackground(canvas);
 
         float scale = (float) getWidth();
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+        canvas.save();
         canvas.scale(scale, scale);
 
         drawAxisLength(canvas);
