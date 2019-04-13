@@ -1,18 +1,57 @@
 -- Merging decision tree log ---
 manifest
 ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+MERGED from [com.android.support:support-v4:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/12dc4c9d09ec03b80c55b96fcdd95d3b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/32ed8fda02cbeff90c90b43d669b69e3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.KalebKE:FSensor:v1.2.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/FSensor-v1.2.1.aar/0526a6dacf5de0041bb24844ee4f790c/AndroidManifest.xml:2:1-17:12
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:17:1-30:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/faa683365b9b1d804c464e015f72d0e1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/00c6b56c0f489566b2d643f6c561ea4c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/923929a104218c0acaf1a89a1d2c1e15/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/29a115e1e0aeb40b186fcdf5bb2602f0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/00295e8575037db3a18e08129e526af3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/ff8bbd54234c3d7e1a37645bc67745e0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/73fe4bbc002c33b4f7363affcaa16d7f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/b20a933f29577b55c4a7bda18ce65669/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/1728984edc84ed47a7ad8e407300f459/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/669ea645d32a5e1ac36ff5c49c318d1f/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/1cbbec8a8ac2c9907a0c618c40a7328a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/0fe0157333b319a5e2f0a3d605031f28/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/46c4d66b486ed98b61e14a0771519327/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/00b680ee691ee5be6bf5da384c512f28/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/28185951b0b46735d36498ca3ae5bb2e/AndroidManifest.xml:17:1-24:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8990c387b31bcc4c1bc813b134470f18/AndroidManifest.xml:17:1-22:12
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/rxandroid-2.1.0.aar/b3b1c9487a616f1430978c5fee488a6c/AndroidManifest.xml:15:1-20:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0b55e543d64fc3849314a82d66486bcc/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/c20d242402f6b72e22fed1c11902656f/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b10716ff08289f2eae39c251b8015078/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/279f56fb15a7f5c5715711d8d022ef8e/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/a41636e6fff5b2b3bc40790e898ef50c/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/6ece62a8e6dfd113cf003b15ba95ca72/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/a3033eafb504462d3349d24d5947fbfe/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/bf9b688e0c88767ede80d38a470f94f1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/ca31fe8ba6c6611705b68710b94554c0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/1b1a1a0cb7778af30da3c91a3d9d31d2/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
 	package
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:3:5-58
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
+		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:1-43:12
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:2:11-69
-	android:versionCode
-		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.VIBRATE
 ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:5:5-66
 	android:name
@@ -27,25 +66,24 @@ ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/Android
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:7:22-81
 application
 ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:9:5-41:19
-MERGED from [com.android.support:appcompat-v7:26.0.0] /Users/kaleb/.android/build-cache/32a7c33c08fe9c05c5a52f914006231dea1f18c9/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.0.0] /Users/kaleb/.android/build-cache/bb0495933c755e5c25955e2db9bdac10a0e0bbfe/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.0.0] /Users/kaleb/.android/build-cache/6bddc2d2e62896b94d4359b41d3c3602b4d11364/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:animated-vector-drawable:26.0.0] /Users/kaleb/.android/build-cache/84a68b182e9cf219b55f2d5a5fae8a9589933d43/output/AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.0.0] /Users/kaleb/.android/build-cache/047ed3a8fd7d7566a976b4481a5b26c266b4e155/output/AndroidManifest.xml:22:5-26:19
-MERGED from [com.github.KalebKE:FSensor:v1.0] /Users/kaleb/.android/build-cache/c8a69c03260104e6050b53343a12bc41ef51337c/output/AndroidManifest.xml:11:5-15:19
-MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:26:5-32:19
-MERGED from [com.android.support:support-fragment:26.0.0] /Users/kaleb/.android/build-cache/9ab803690b9f72dfd891f82c0038a16a6df086a1/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.0.0] /Users/kaleb/.android/build-cache/cb6cab8df45e14820af52f0d5763adf04f1ee074/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.0.0] /Users/kaleb/.android/build-cache/a4f9f8ef5380bad97db09dcce6c13979c8f41e52/output/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.0.0] /Users/kaleb/.android/build-cache/1275e2eff198f5267c39636c10d9fbb2e38a6561/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.github.KalebKE:FSensor:v1.2.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/FSensor-v1.2.1.aar/0526a6dacf5de0041bb24844ee4f790c/AndroidManifest.xml:11:5-15:19
+MERGED from [com.github.KalebKE:FSensor:v1.2.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/FSensor-v1.2.1.aar/0526a6dacf5de0041bb24844ee4f790c/AndroidManifest.xml:11:5-15:19
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:22:5-28:19
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:22:5-28:19
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/28185951b0b46735d36498ca3ae5bb2e/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/28185951b0b46735d36498ca3ae5bb2e/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0b55e543d64fc3849314a82d66486bcc/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0b55e543d64fc3849314a82d66486bcc/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/28185951b0b46735d36498ca3ae5bb2e/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from [com.github.KalebKE:FSensor:v1.2.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/FSensor-v1.2.1.aar/0526a6dacf5de0041bb24844ee4f790c/AndroidManifest.xml:14:9-35
 	android:label
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:12:9-41
-	android:supportsRtl
-		ADDED from [com.github.KalebKE:FSensor:v1.0] /Users/kaleb/.android/build-cache/c8a69c03260104e6050b53343a12bc41ef51337c/output/AndroidManifest.xml:14:9-35
-	android:allowBackup
-		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:10:9-35
 	android:icon
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:11:9-47
+	android:allowBackup
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:10:9-35
 	android:theme
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:13:9-40
 activity#com.kircherelectronics.accelerationexplorer.activity.HomeActivity
@@ -58,7 +96,7 @@ ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/Android
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:16:13-63
 	android:name
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:15:13-93
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:19:13-23:29
 action#android.intent.action.MAIN
 ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:20:17-69
@@ -94,48 +132,87 @@ ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/Android
 		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml:38:13-108
 uses-sdk
 INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:appcompat-v7:26.0.0] /Users/kaleb/.android/build-cache/32a7c33c08fe9c05c5a52f914006231dea1f18c9/output/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:26.0.0] /Users/kaleb/.android/build-cache/bb0495933c755e5c25955e2db9bdac10a0e0bbfe/output/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-media-compat:26.0.0] /Users/kaleb/.android/build-cache/6bddc2d2e62896b94d4359b41d3c3602b4d11364/output/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:animated-vector-drawable:26.0.0] /Users/kaleb/.android/build-cache/84a68b182e9cf219b55f2d5a5fae8a9589933d43/output/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:26.0.0] /Users/kaleb/.android/build-cache/047ed3a8fd7d7566a976b4481a5b26c266b4e155/output/AndroidManifest.xml:20:5-44
-MERGED from [com.github.KalebKE:FSensor:v1.0] /Users/kaleb/.android/build-cache/c8a69c03260104e6050b53343a12bc41ef51337c/output/AndroidManifest.xml:7:5-9:41
-MERGED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:22:5-24:41
-MERGED from [android.arch.lifecycle:runtime:1.0.0-alpha6] /Users/kaleb/.android/build-cache/4ae8f1c43d247f04f05980b1973ce13f8b325678/output/AndroidManifest.xml:22:5-24:41
-MERGED from [android.arch.core:runtime:1.0.0-alpha6] /Users/kaleb/.android/build-cache/c26e91b10b1945a40e3cc7162f49e096e8d7ede3/output/AndroidManifest.xml:22:5-24:41
-MERGED from [com.android.support:support-fragment:26.0.0] /Users/kaleb/.android/build-cache/9ab803690b9f72dfd891f82c0038a16a6df086a1/output/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-ui:26.0.0] /Users/kaleb/.android/build-cache/cb6cab8df45e14820af52f0d5763adf04f1ee074/output/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:26.0.0] /Users/kaleb/.android/build-cache/a4f9f8ef5380bad97db09dcce6c13979c8f41e52/output/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-compat:26.0.0] /Users/kaleb/.android/build-cache/1275e2eff198f5267c39636c10d9fbb2e38a6561/output/AndroidManifest.xml:21:5-23:58
-	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:26.0.0] /Users/kaleb/.android/build-cache/32a7c33c08fe9c05c5a52f914006231dea1f18c9/output/AndroidManifest.xml:23:9-75
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:support-v4:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/12dc4c9d09ec03b80c55b96fcdd95d3b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/12dc4c9d09ec03b80c55b96fcdd95d3b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/32ed8fda02cbeff90c90b43d669b69e3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/32ed8fda02cbeff90c90b43d669b69e3/AndroidManifest.xml:20:5-44
+MERGED from [com.github.KalebKE:FSensor:v1.2.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/FSensor-v1.2.1.aar/0526a6dacf5de0041bb24844ee4f790c/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.KalebKE:FSensor:v1.2.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/FSensor-v1.2.1.aar/0526a6dacf5de0041bb24844ee4f790c/AndroidManifest.xml:7:5-9:41
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/faa683365b9b1d804c464e015f72d0e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/faa683365b9b1d804c464e015f72d0e1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/00c6b56c0f489566b2d643f6c561ea4c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/00c6b56c0f489566b2d643f6c561ea4c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/923929a104218c0acaf1a89a1d2c1e15/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/923929a104218c0acaf1a89a1d2c1e15/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/29a115e1e0aeb40b186fcdf5bb2602f0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/29a115e1e0aeb40b186fcdf5bb2602f0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/00295e8575037db3a18e08129e526af3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/00295e8575037db3a18e08129e526af3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/ff8bbd54234c3d7e1a37645bc67745e0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/ff8bbd54234c3d7e1a37645bc67745e0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/73fe4bbc002c33b4f7363affcaa16d7f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/73fe4bbc002c33b4f7363affcaa16d7f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/b20a933f29577b55c4a7bda18ce65669/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/b20a933f29577b55c4a7bda18ce65669/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/1728984edc84ed47a7ad8e407300f459/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/1728984edc84ed47a7ad8e407300f459/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/669ea645d32a5e1ac36ff5c49c318d1f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/669ea645d32a5e1ac36ff5c49c318d1f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/1cbbec8a8ac2c9907a0c618c40a7328a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/1cbbec8a8ac2c9907a0c618c40a7328a/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/0fe0157333b319a5e2f0a3d605031f28/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/0fe0157333b319a5e2f0a3d605031f28/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/46c4d66b486ed98b61e14a0771519327/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/46c4d66b486ed98b61e14a0771519327/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/00b680ee691ee5be6bf5da384c512f28/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/00b680ee691ee5be6bf5da384c512f28/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/28185951b0b46735d36498ca3ae5bb2e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/28185951b0b46735d36498ca3ae5bb2e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8990c387b31bcc4c1bc813b134470f18/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/8990c387b31bcc4c1bc813b134470f18/AndroidManifest.xml:20:5-44
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/rxandroid-2.1.0.aar/b3b1c9487a616f1430978c5fee488a6c/AndroidManifest.xml:18:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/rxandroid-2.1.0.aar/b3b1c9487a616f1430978c5fee488a6c/AndroidManifest.xml:18:5-43
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0b55e543d64fc3849314a82d66486bcc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0b55e543d64fc3849314a82d66486bcc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/c20d242402f6b72e22fed1c11902656f/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/c20d242402f6b72e22fed1c11902656f/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b10716ff08289f2eae39c251b8015078/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/b10716ff08289f2eae39c251b8015078/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/279f56fb15a7f5c5715711d8d022ef8e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/279f56fb15a7f5c5715711d8d022ef8e/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/a41636e6fff5b2b3bc40790e898ef50c/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/a41636e6fff5b2b3bc40790e898ef50c/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/6ece62a8e6dfd113cf003b15ba95ca72/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/6ece62a8e6dfd113cf003b15ba95ca72/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/a3033eafb504462d3349d24d5947fbfe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/a3033eafb504462d3349d24d5947fbfe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/bf9b688e0c88767ede80d38a470f94f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/bf9b688e0c88767ede80d38a470f94f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/ca31fe8ba6c6611705b68710b94554c0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/ca31fe8ba6c6611705b68710b94554c0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/1b1a1a0cb7778af30da3c91a3d9d31d2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/1b1a1a0cb7778af30da3c91a3d9d31d2/AndroidManifest.xml:20:5-44
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
+		ADDED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kaleb/StudioProjects/AccelerationExplorer/app/src/main/AndroidManifest.xml
-meta-data#android.support.VERSION
-ADDED from [com.android.support:appcompat-v7:26.0.0] /Users/kaleb/.android/build-cache/32a7c33c08fe9c05c5a52f914006231dea1f18c9/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-v4:26.0.0] /Users/kaleb/.android/build-cache/bb0495933c755e5c25955e2db9bdac10a0e0bbfe/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.0.0] /Users/kaleb/.android/build-cache/6bddc2d2e62896b94d4359b41d3c3602b4d11364/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:animated-vector-drawable:26.0.0] /Users/kaleb/.android/build-cache/84a68b182e9cf219b55f2d5a5fae8a9589933d43/output/AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.0.0] /Users/kaleb/.android/build-cache/047ed3a8fd7d7566a976b4481a5b26c266b4e155/output/AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-fragment:26.0.0] /Users/kaleb/.android/build-cache/9ab803690b9f72dfd891f82c0038a16a6df086a1/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.0.0] /Users/kaleb/.android/build-cache/cb6cab8df45e14820af52f0d5763adf04f1ee074/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.0.0] /Users/kaleb/.android/build-cache/a4f9f8ef5380bad97db09dcce6c13979c8f41e52/output/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.0.0] /Users/kaleb/.android/build-cache/1275e2eff198f5267c39636c10d9fbb2e38a6561/output/AndroidManifest.xml:26:9-28:38
-	android:value
-		ADDED from [com.android.support:appcompat-v7:26.0.0] /Users/kaleb/.android/build-cache/32a7c33c08fe9c05c5a52f914006231dea1f18c9/output/AndroidManifest.xml:28:13-35
-	android:name
-		ADDED from [com.android.support:appcompat-v7:26.0.0] /Users/kaleb/.android/build-cache/32a7c33c08fe9c05c5a52f914006231dea1f18c9/output/AndroidManifest.xml:27:13-51
-provider#android.arch.lifecycle.LifecycleRuntimeTrojanProvider
-ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:27:9-31:43
+provider#android.arch.lifecycle.ProcessLifecycleOwnerInitializer
+ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:23:9-27:43
 	android:authorities
-		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:29:13-68
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:25:13-68
 	android:multiprocess
-		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:31:13-40
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:27:13-40
 	android:exported
-		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:30:13-37
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from [android.arch.lifecycle:extensions:1.0.0-alpha6] /Users/kaleb/.android/build-cache/d16b7caa1ed1e5c4b6331b53f879d448784c82ab/output/AndroidManifest.xml:28:13-81
+		ADDED from [android.arch.lifecycle:extensions:1.1.1] /Users/kaleb/.gradle/caches/transforms-1/files-1.1/extensions-1.1.1.aar/fc7563d103a3cf3d28ed50f38a80bcc7/AndroidManifest.xml:24:13-83
