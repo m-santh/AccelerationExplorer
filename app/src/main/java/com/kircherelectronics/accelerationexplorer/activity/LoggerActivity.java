@@ -54,6 +54,7 @@ public class LoggerActivity extends AppCompatActivity {
     private final static int WRITE_EXTERNAL_STORAGE_REQUEST = 1000;
     private DataLoggerManager dataLogger;
     private boolean logData = false;
+    private float[] acceleration;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,13 +110,12 @@ public class LoggerActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
                 }
-                return;
             }
         }
     }
 
     private void initStartButton() {
-        final VectorDrawableButton button = (VectorDrawableButton) findViewById(R.id.button_start);
+        final VectorDrawableButton button = findViewById(R.id.button_start);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -160,8 +160,62 @@ public class LoggerActivity extends AppCompatActivity {
         dataLogger.stopDataLog();
     }
 
+    private void writeData() {
+        if(logData) {
+            dataLogger.setAcceleration(acceleration);
+        }
+    }
+
     private void initViewModel() {
         SensorViewModel model = ViewModelProviders.of(this).get(SensorViewModel.class);
+
+        model.getLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getLowPassLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getComplimentaryLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getKalmanLinearAccelerationSensorLiveData().removeObservers(this);
+        model.getAccelerationSensorLiveData().removeObservers(this);
+
+        if(PrefUtils.getPrefAndroidLinearAccelerationEnabled(this)) {
+            model.getLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                    writeData();
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(this)){
+            model.getLowPassLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                    writeData();
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorComplimentaryLinearAccelerationEnabled(this)) {
+            model.getComplimentaryLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                    writeData();
+                }
+            });
+        } else if(PrefUtils.getPrefFSensorKalmanLinearAccelerationEnabled(this)) {
+            model.getKalmanLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                    writeData();
+                }
+            });
+        } else {
+            model.getAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
+                @Override
+                public void onChanged(@Nullable float[] floats) {
+                    acceleration = floats;
+                    writeData();
+                }
+            });
+        }
     }
 
     private void requestPermissions() {

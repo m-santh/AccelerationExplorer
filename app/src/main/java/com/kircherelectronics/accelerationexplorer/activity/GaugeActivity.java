@@ -44,8 +44,6 @@ public class GaugeActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initViewModel();
-
         setContentView(R.layout.layout_gauge);
     }
 
@@ -92,9 +90,5 @@ public class GaugeActivity extends AppCompatActivity {
         helpDialog.setContentView(view);
 
         helpDialog.show();
-    }
-
-    private void initViewModel() {
-        SensorViewModel model = ViewModelProviders.of(this).get(SensorViewModel.class);
     }
 }

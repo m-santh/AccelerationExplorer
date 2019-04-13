@@ -45,8 +45,6 @@ public class VectorActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 
-		initViewModel();
-
 		setContentView(R.layout.layout_vector);
 	}
 
@@ -106,10 +104,6 @@ public class VectorActivity extends AppCompatActivity
 				R.layout.layout_help_vector, null));
 
 		helpDialog.show();
-	}
-
-	private void initViewModel() {
-		SensorViewModel model = ViewModelProviders.of(this).get(SensorViewModel.class);
 	}
 
 	private void updateConfiguration() {
