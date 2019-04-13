@@ -115,7 +115,6 @@ public class VectorGaugeFragment extends Fragment {
                 }
             });
         } else if(PrefUtils.getPrefFSensorLpfLinearAccelerationEnabled(getContext())){
-
             model.getLowPassLinearAccelerationSensorLiveData().observe(this, new Observer<float[]>() {
                 @Override
                 public void onChanged(@Nullable float[] floats) {
