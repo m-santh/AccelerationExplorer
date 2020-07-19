@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.StatusBarFragment"
+    <fragment android:name="com.deepnxt.tracksafe.fragment.StatusBarFragment"
         android:id="@+id/status_bar_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_status_bar" />
 
-    <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.VectorGaugeFragment"
+    <fragment android:name="com.deepnxt.tracksafe.fragment.VectorGaugeFragment"
         android:id="@+id/acceleration_gauge_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.StatusBarFragment"
+    <fragment android:name="com.deepnxt.tracksafe.fragment.StatusBarFragment"
         android:id="@+id/status_bar_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton
+            <com.deepnxt.tracksafe.view.VectorDrawableButton
                 android:id="@+id/button_logger_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:textStyle="bold"
                 app:drawableBottomCompat="@drawable/ic_timeline_white_48px"/>
 
-            <com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton
+            <com.deepnxt.tracksafe.view.VectorDrawableButton
                 android:id="@+id/button_vector_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:textStyle="bold"
                 app:drawableBottomCompat="@drawable/ic_trending_flat_white_48px"/>
 
-            <com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton
+            <com.deepnxt.tracksafe.view.VectorDrawableButton
                 android:id="@+id/button_gauge_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:textStyle="bold"
                 app:drawableBottomCompat="@drawable/ic_donut_large_white_48px"/>
 
-            <com.kircherelectronics.accelerationexplorer.view.VectorDrawableButton
+            <com.deepnxt.tracksafe.view.VectorDrawableButton
                 android:id="@+id/button_config_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,13 +66,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.AccelerationGaugeFragment"
+            <fragment android:name="com.deepnxt.tracksafe.fragment.AccelerationGaugeFragment"
                 android:id="@+id/acceleration_gauge_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_acceleration_gauge" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".Tabs$BugtrackerFragment">
+
+                <WebView
+                    android:id="@+id/scatterplot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

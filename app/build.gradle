@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    /*
     signingConfigs {
         ke_developer {
             keyAlias ANDROID_KEY_ALIAS
@@ -9,10 +10,11 @@ android {
             storePassword ANDROID_STORE_PASSWORD
         }
     }
+     */
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.kircherelectronics.accelerationexplorer"
+        applicationId "com.deepnxt.tracksafe"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode = 19
@@ -38,4 +40,7 @@ dependencies {
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.x.x'
+
+    //implementation 'com.jakewharton:butterknife:10.2.1'
+    //annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }

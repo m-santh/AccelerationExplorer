@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.StatusBarFragment"
+    <fragment android:name="com.deepnxt.tracksafe.fragment.StatusBarFragment"
         android:id="@+id/status_bar_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,14 +18,14 @@
         android:weightSum="1"
         android:gravity="center">
 
-        <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.AccelerationGaugeFragment"
+        <fragment android:name="com.deepnxt.tracksafe.fragment.AccelerationGaugeFragment"
             android:id="@+id/acceleration_gauge_fragment"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="0.5"
             tools:layout="@layout/fragment_acceleration_gauge" />
 
-        <fragment android:name="com.kircherelectronics.accelerationexplorer.fragment.RotationGaugeFragment"
+        <fragment android:name="com.deepnxt.tracksafe.fragment.RotationGaugeFragment"
             android:id="@+id/rotation_gauge_fragment"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
